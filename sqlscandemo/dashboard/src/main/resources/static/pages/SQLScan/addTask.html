@@ -1,0 +1,40 @@
+<div class="container-fluid addTask">
+			<div class="ucd-panel-heading">
+				<span>新增任务</span>
+			</div>
+			<div class="ucd-panel panel-default">
+				<div class="panel-body configPanel">
+					<form name="addTaskFrom" autocomplete="off"  ng-submit="addTaskFrom.$valid && addTaskSubmit(addTaskFrom)" novalidate>
+						<div class="row">	   
+							<div class="form-group col-md-6">
+							    <label for="name"><span>*</span>名称</label>
+							    <input id="name" name="name" type="text" class="form-control" ng-model="ruleName" placeholder="请输入名称" required>
+							</div>
+						</div>
+						<div class="row">	   
+							<div class="form-group col-md-6">
+								<label for="business"><span>*</span>业务</label>
+								<div>
+									<select id="business" name="business" class="form-control" ng-model="selectBusiness" ng-options="type.id as type.name for bis in Business" required>
+										<option value="">--请选择业务--</option>
+									</select>
+								</div>
+							</div>
+						</div>
+						
+						<div class="row">	   
+							<div class="form-group col-md-6">
+								<label for="baseType"><span>*</span>库类型</label>
+								<div>
+									<select id="baseType" name="baseType" class="form-control" ng-model="selectTypeValue" ng-options="type.id as type.name for type in typeLists" required>
+										<option value="">--请选择库类型--</option>
+									</select>
+								</div>
+							</div>
+						</div>
+						<button type="submit" class="btn btn-primary">&nbsp;提&nbsp;&nbsp;交&nbsp;</button>
+						<button type="reset" class="btn btn-warning">&nbsp;取&nbsp;&nbsp;消&nbsp;</button>
+					</form>
+				</div>
+			</div>
+</div>

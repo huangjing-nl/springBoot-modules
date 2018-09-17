@@ -1,0 +1,9 @@
+$date=getDateStr
+$date_ep=getLastDateStr
+$last_date=getLastDateStr
+$last_date_ep=getLast2DateStr
+$hour=getHourStr
+$lastHour=getLastHour
+$last_hm_date=getLastDateStr
+$last_hm_date_ep=getLast2DateStr
+$month=getMonthStr

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huawei.spring.mappers.SQLScanMapper.OperTypeMapper" >
+  <resultMap id="classOperTypeMap" type="com.huawei.spring.catalogue.SQLScan.OperType" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <collection property="scanRules" ofType="com.huawei.spring.catalogue.SQLScan.ScanRule">
+      <id column="r_id" property="id"/>
+      <result column="r_name" property="name"/>
+      <result column="category" property="category"/>
+      <result column="description" property="description"/>
+      <result column="typeRegexp" property="typeRegexp"/>
+      <result column="conditionRegexp" property="conditionRegexp"/>
+      <result column="ruleGroup" property="ruleGroup"/>
+      <result column="baseType" property="baseType"/>
+      <result column="default_level" property="defaultLevel"/>
+      <result column="method" property="method"/>
+      <result column="ruleSwitch" property="ruleSwitch"/>
+    </collection>
+  </resultMap>
+  <select id="findAll" resultMap="classOperTypeMap">
+    SELECT oper.id, oper.name, rule.id AS r_id, rule.name AS r_name, rule.CATEGORY, rule.DESCRIPTION, rule.TYPEREGEXP, rule.CONDITIONREGEXP, rule.RULEGROUP, rule.BASETYPE, rule.default_level, rule.method, rule.ruleSwitch
+    from oper_type oper, oper_rule_level_business re, scan_rule rule
+    where oper.name = re.OPER_NAME AND re.RULE_ID = rule.id
+  </select>
+
+  <resultMap id="classOperAndBusiness" type="com.huawei.spring.catalogue.SQLScan.OperType" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <collection property="scanRules" ofType="com.huawei.spring.catalogue.SQLScan.ScanRule">
+      <id column="r_id" property="id"/>
+      <result column="r_name" property="name"/>
+      <result column="category" property="category"/>
+      <result column="description" property="description"/>
+      <result column="typeRegexp" property="typeRegexp"/>
+      <result column="conditionRegexp" property="conditionRegexp"/>
+      <result column="ruleGroup" property="ruleGroup"/>
+      <result column="baseType" property="baseType"/>
+      <result column="default_level" property="defaultLevel"/>
+      <result column="method" property="method"/>
+      <result column="ruleSwitch" property="ruleSwitch"/>
+      <association property="level" javaType="com.huawei.spring.catalogue.SQLScan.RuleLevel">
+        <id column="level_id" property="id"/>
+        <result column="level" property="level"/>
+      </association>
+      <association property="business" javaType="com.huawei.spring.catalogue.SQLScan.Business">
+        <id column="business_id" property="id"/>
+        <result column="name" property="name"/>
+      </association>
+    </collection>
+  </resultMap>
+  <select id="findByBusiness" resultMap="classOperAndBusiness" parameterType="String">
+    SELECT oper.id, oper.name, rule.id AS r_id, rule.name AS r_name, rule.CATEGORY, rule.DESCRIPTION, rule.TYPEREGEXP, rule.CONDITIONREGEXP, rule.RULEGROUP, rule.BASETYPE, rule.default_level, rule.method, rule.ruleSwitch, l.id AS level_id, l.level, b.id AS business_id, b.name
+    from oper_type oper, business b, oper_rule_level_business re, scan_rule rule, level l
+    where oper.name = re.OPER_NAME AND re.RULE_ID = rule.id AND b.id = re.business_id AND l.id = re.level_id AND b.name = #{business}
+  </select>
+
+
+  <resultMap id="classOperType" type="com.huawei.spring.catalogue.SQLScan.OperType">
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <select id="findOpers" resultMap="classOperType">
+    SELECT id, name FROM oper_type
+  </select>
+
+  <select id="findByName" resultMap="classOperType" parameterType="String">
+    SELECT id, name FROM oper_type WHERE name = #{name}
+  </select>
+
+  <!--<sql id="Base_Column_List" >-->
+    <!--id, name, age-->
+  <!--</sql>-->
+
+  <!--<select id="getAll" resultMap="BaseResultMap"  >-->
+    <!--SELECT-->
+    <!--<include refid="Base_Column_List" />-->
+    <!--FROM user-->
+  <!--</select>-->
+
+  <!--<select id="findUserByName" parameterType="java.lang.String" resultMap="BaseResultMap" >-->
+    <!--SELECT-->
+    <!--<include refid="Base_Column_List" />-->
+    <!--FROM user-->
+    <!--WHERE NAME = #{name}-->
+  <!--</select>-->
+
+  <!--<insert id="insert" parameterType="com.kerry.model.User" >-->
+    <!--INSERT INTO-->
+    <!--user-->
+    <!--(id,name,age,address)-->
+    <!--VALUES-->
+    <!--(#{id},#{name}, #{age}, #{address})-->
+  <!--</insert>-->
+
+  <!--<update id="update" parameterType="com.kerry.model.User" >-->
+    <!--UPDATE-->
+    <!--user-->
+    <!--SET-->
+    <!--<if test="name != null">name = #{name},</if>-->
+    <!--<if test="age != null">age = #{age},</if>-->
+    <!--address = #{address}-->
+    <!--WHERE-->
+    <!--id = #{id}-->
+  <!--</update>-->
+
+  <!--<delete id="delete" parameterType="java.lang.Integer" >-->
+    <!--DELETE FROM-->
+    <!--user-->
+    <!--WHERE-->
+    <!--id =#{id}-->
+  <!--</delete>-->
+
+</mapper>

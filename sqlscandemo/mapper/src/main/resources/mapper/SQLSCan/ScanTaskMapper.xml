@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huawei.spring.mappers.SQLScanMapper.ScanTaskMapper" >
+  <sql id="Base_Column_List" >
+    id, name, baseType, business, version, taskPath, fileName, created, sqlString, status
+  </sql>
+  <resultMap id="onlyTasks" type="com.huawei.spring.catalogue.SQLScan.ScanTask" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="baseType" property="baseType" jdbcType="VARCHAR" />
+    <result column="business" property="business" jdbcType="VARCHAR"/>
+    <result column="version" property="version" jdbcType="VARCHAR"/>
+    <result column="taskPath" property="taskPath" jdbcType="VARCHAR"/>
+    <result column="fileName" property="fileName" jdbcType="VARCHAR"/>
+    <result column="created" property="created" />
+    <result column="sqlString" property="sqlString" />
+    <result column="status" property="status" />
+  </resultMap>
+  <select id="findTasks" resultMap="onlyTasks">
+    select <include refid="Base_Column_List" /> from scan_task
+  </select>
+
+  <select id="getCounts" resultType="Integer">
+    SELECT COUNT(id) FROM scan_task
+  </select>
+
+  <select id="getCountsBySearch" resultType="Integer" parameterType="com.huawei.spring.catalogue.SQLScan.Pagination">
+    SELECT COUNT(id) FROM scan_task WHERE name like #{search} OR business like #{search} or basetype like #{search} or filename like #{search} or version like #{search}
+  </select>
+
+  <select id="findByPage" resultMap="onlyTasks" parameterType="com.huawei.spring.catalogue.SQLScan.Pagination">
+    SELECT <include refid="Base_Column_List" /> FROM scan_task ORDER BY created DESC limit #{offset}, #{rows}
+  </select>
+
+  <select id="findByPageAndSearch" resultMap="onlyTasks" parameterType="com.huawei.spring.catalogue.SQLScan.Pagination">
+    SELECT <include refid="Base_Column_List" /> FROM scan_task
+    WHERE name like #{search} OR business like #{search} or basetype like #{search} or filename like #{search} or version like #{search}
+    ORDER BY created DESC limit #{offset}, #{rows}
+  </select>
+
+  <select id="findById" parameterType="java.lang.String" resultMap="onlyTasks" >
+    select <include refid="Base_Column_List" /> from scan_task WHERE id = #{id}
+  </select>
+
+  <update id="update" parameterType="com.huawei.spring.catalogue.SQLScan.ScanTask">
+    UPDATE scan_task
+    <trim prefix="set" suffixOverrides=",">
+      <if test="name!=null">name = #{name},</if>
+      <if test="baseType!=null">baseType = #{baseType},</if>
+      <if test="business!=null">business = #{business},</if>
+      <if test="version!=null">version = #{version},</if>
+      <if test="taskPath!=null">taskPath = #{taskPath},</if>
+      <if test="fileName!=null">fileName = #{fileName},</if>
+      <if test="created!=null">created = #{created},</if>
+      <if test="sqlString!=null">sqlString = #{sqlString},</if>
+      <if test="status!=null">status = #{status},</if>
+    </trim> WHERE id = #{id}
+  </update>
+
+  <select id="findByNameAndBusinessAndBaseType" parameterType="com.huawei.spring.catalogue.SQLScan.ScanTask" resultMap="onlyTasks">
+    select <include refid="Base_Column_List" /> from scan_task WHERE name = #{name} AND business = #{business} AND baseType = #{baseType}
+  </select>
+
+  <insert id="addTask" parameterType="com.huawei.spring.catalogue.SQLScan.ScanTask">
+    INSERT into scan_task(id, name, baseType, business, version, taskPath, fileName, created, sqlString, status) VALUES(#{id}, #{name}, #{baseType}, #{business}, #{version}, #{taskPath}, #{fileName}, #{created}, #{sqlString}, #{status})
+  </insert>
+
+  <!--<update id="update" parameterType="com.kerry.model.User" >-->
+    <!--UPDATE-->
+    <!--user-->
+    <!--SET-->
+    <!--<if test="name != null">name = #{name},</if>-->
+    <!--<if test="age != null">age = #{age},</if>-->
+    <!--address = #{address}-->
+    <!--WHERE-->
+    <!--id = #{id}-->
+  <!--</update>-->
+
+  <delete id="deleteById" parameterType="String" >
+    DELETE FROM scan_task WHERE id =#{taskId}
+  </delete>
+
+</mapper>

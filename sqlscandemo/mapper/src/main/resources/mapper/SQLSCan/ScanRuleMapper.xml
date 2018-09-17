@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huawei.spring.mappers.SQLScanMapper.ScanRuleMapper" >
+  <sql id="columns">
+    id, name, category, description, typeRegexp, conditionRegexp, ruleGroup, baseType, default_level, method, ruleSwitch
+  </sql>
+  <resultMap id="classScanRule" type="com.huawei.spring.catalogue.SQLScan.ScanRule" >
+    <id column="id" property="id"/>
+    <result column="name" property="name"/>
+    <result column="category" property="category"/>
+    <result column="description" property="description"/>
+    <result column="typeRegexp" property="typeRegexp"/>
+    <result column="conditionRegexp" property="conditionRegexp"/>
+    <result column="ruleGroup" property="ruleGroup"/>
+    <result column="baseType" property="baseType"/>
+    <result column="default_level" property="defaultLevel"/>
+    <result column="method" property="method"/>
+    <result column="ruleSwitch" property="ruleSwitch"/>
+    <association property="level" javaType="com.huawei.spring.catalogue.SQLScan.RuleLevel">
+      <id column="l_id" property="id"/>
+      <result column="level" property="level"/>
+    </association>
+    <association property="business" javaType="com.huawei.spring.catalogue.SQLScan.Business">
+      <id column="b_id" property="id"/>
+      <result column="name" property="name"/>
+    </association>
+  </resultMap>
+  <select id="findAll" resultMap="classScanRule">
+  SELECT
+		r.id,
+		r. NAME,
+		r.category,
+		r.description,
+		r.typeRegexp,
+		r.conditionRegexp,
+		r.ruleGroup,
+		r.baseType,
+		r.DEFAULT_LEVEL,
+		r.method,
+		r.ruleSwitch,
+		l.id AS l_id,
+		l. LEVEL
+	FROM
+		scan_rule r,
+		LEVEL l
+	WHERE r.DEFAULT_LEVEL = l.level
+  </select>
+
+  <select id="findById" parameterType="String" resultMap="classScanRule">
+    select <include refid="columns"/> from scan_rule WHERE id = #{id}
+  </select>
+
+  <select id="getCounts" resultType="Integer">
+    SELECT COUNT(id) FROM scan_rule
+  </select>
+
+  <select id="getCountsBySearch" resultType="Integer" parameterType="com.huawei.spring.catalogue.SQLScan.Pagination">
+    SELECT COUNT(id) FROM scan_rule WHERE name like #{search} OR CATEGORY like #{search} or TYPEREGEXP like #{search} or CONDITIONREGEXP like #{search} or DEFAULT_LEVEL like #{search}
+  </select>
+
+  <select id="findByPage" resultMap="classScanRule" parameterType="com.huawei.spring.catalogue.SQLScan.Pagination">
+    select <include refid="columns"/> from scan_rule ORDER BY ${sort} ${sortOrder} limit #{offset}, #{rows}
+  </select>
+
+  <select id="findByPageAndSearch" resultMap="classScanRule" parameterType="com.huawei.spring.catalogue.SQLScan.Pagination">
+    select <include refid="columns"/> from scan_rule
+    WHERE name like #{search} OR CATEGORY like #{search} or TYPEREGEXP like #{search} or CONDITIONREGEXP like #{search} or DEFAULT_LEVEL like #{search}
+    ORDER BY ${sort} ${sortOrder} limit #{offset}, #{rows}
+  </select>
+
+  <select id="findByOperAndBusiness" resultMap="classScanRule" parameterType="String">
+    SELECT r.id, r.name, r.category, r.description, r.typeRegexp, r.conditionRegexp, r.ruleGroup, r.baseType, r.default_level, r.method, r.ruleSwitch, l.id AS l_id, l.level, b.id AS b_id, b.name
+    FROM oper_type o, scan_rule r, business b, oper_rule_level_business re, level l
+    WHERE o.`NAME`=re.OPER_NAME
+    AND r.id=re.RULE_ID
+    AND b.id=re.BUSINESS_ID
+    AND r.DEFAULT_LEVEL = l.`level`
+    AND o.name = #{operName} AND b.id = #{businessId}
+  </select>
+
+  <!--<sql id="Base_Column_List" >-->
+    <!--id, name, age-->
+  <!--</sql>-->
+
+  <!--<select id="getAll" resultMap="BaseResultMap"  >-->
+    <!--SELECT-->
+    <!--<include refid="Base_Column_List" />-->
+    <!--FROM user-->
+  <!--</select>-->
+
+  <!--<select id="findUserByName" parameterType="java.lang.String" resultMap="BaseResultMap" >-->
+    <!--SELECT-->
+    <!--<include refid="Base_Column_List" />-->
+    <!--FROM user-->
+    <!--WHERE NAME = #{name}-->
+  <!--</select>-->
+
+  <insert id="addRule" parameterType="com.huawei.spring.catalogue.SQLScan.ScanRule" >
+    INSERT INTO scan_rule (id, name, category, description, typeRegexp, conditionRegexp, ruleGroup, baseType, default_level, method, ruleSwitch)
+    VALUES (#{id}, #{name}, #{category}, #{description}, #{typeRegexp}, #{conditionRegexp}, #{ruleGroup}, #{baseType}, #{defaultLevel}, #{method}, #{ruleSwitch})
+  </insert>
+
+  <update id="update" parameterType="com.huawei.spring.catalogue.SQLScan.ScanRule">
+    UPDATE scan_rule
+    <trim prefix="set" suffixOverrides=",">
+      <if test="name!=null">name = #{name},</if>
+      <if test="category!=null">category = #{category},</if>
+      <if test="description!=null">description = #{description},</if>
+      <if test="typeRegexp!=null">typeRegexp = #{typeRegexp},</if>
+      <if test="conditionRegexp!=null">conditionRegexp = #{conditionRegexp},</if>
+      <if test="ruleGroup!=null">ruleGroup = #{ruleGroup},</if>
+      <if test="baseType!=null">baseType = #{baseType},</if>
+      <if test="defaultLevel!=null">default_level = #{defaultLevel},</if>
+      <if test="method!=null">method = #{method},</if>
+      <if test="ruleSwitch!=null">ruleSwitch = #{ruleSwitch},</if>
+    </trim> WHERE id = #{id}
+  </update>
+
+  <delete id="delete" parameterType="String">
+    DELETE FROM scan_rule WHERE id = #{id}
+  </delete>
+  <!--<update id="updateRule" parameterType="com.huawei.spring.catalogue.SQLScan.ScanRule" >-->
+    <!--UPDATE scan_rule SET-->
+    <!--<if test="name != null">name = #{name},</if>-->
+    <!--<if test="age != null">age = #{age},</if>-->
+    <!--address = #{address}-->
+    <!--WHERE-->
+    <!--id = #{id}-->
+  <!--</update>-->
+
+  <!--<delete id="delete" parameterType="java.lang.Integer" >-->
+    <!--DELETE FROM-->
+    <!--user-->
+    <!--WHERE-->
+    <!--id =#{id}-->
+  <!--</delete>-->
+
+</mapper>

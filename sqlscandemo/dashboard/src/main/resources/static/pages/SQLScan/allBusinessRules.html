@@ -1,0 +1,35 @@
+<div class="container-fluid allBussiness">
+	<div class="row">
+		<div class="col-md-8">
+			<div class="form-inline">
+				<label><span>*</span>业务:</label>
+				<select ng-change="serchBusinessRules(selectBusinessValue,selectTypeValue)" name="business" class="form-control" style="margin-right: 20px;" ng-model="selectBusinessValue" ng-options="business.name as business.name for business in businessLists">
+					<option value="">--请选择业务--</option>
+				</select>
+				<label><span>*</span>操作类型:</label>
+				<select style="width: 140px;" ng-change="serchBusinessRules(selectBusinessValue,selectTypeValue)" name="type" class="form-control" ng-model="selectTypeValue" ng-options="type.name as type.name for type in typeLists">
+					<option value="">--请选择操作类型--</option>
+				</select>
+				<!-- <button class="btn btn-primary pull-right" style="margin-right: 10px" ng-click="serchBusinessRules(selectBusinessValue,selectTypeValue)">
+				            <span class="glyphicon glyphicon-search"></span>&nbsp;搜索&nbsp;
+				        </button> -->
+			</div>
+		</div>
+		<div class="col-md-4">
+			<a href="#/businessRules" >
+				<button class="btn btn-primary pull-right" style="margin-right: 10px">
+					&nbsp;新增配置&nbsp;
+				</button>
+			</a>
+		</div>
+	</div>
+	<div id="toolbarBusiness" class="toolbarBusiness">
+		<a href="javascript:void(0);" ng-click="deletedAll()">
+			<button type="button" class="btn btn-primary"><span>批量删除</span></button>
+		</a>
+	</div>
+	<div class="bs-example">
+		<table data-toggle="table" id="businessRuleTable" class="allBusinessRules ucd-table" data-pagination="true" style="table-layout:fixed;">
+		</table>
+	</div>
+</div>

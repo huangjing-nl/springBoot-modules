@@ -1,0 +1,129 @@
+@CHARSET "UTF-8";
+/* head */
+.configRule .process{
+	margin: 20px 0px;
+    height: 90px;
+    border: 1px solid #eee;
+    padding: 25px 0;
+    text-align: center;
+    background: #fff;
+}
+.process .processArea{
+	display: inline-block;
+	text-align: center;
+}
+.configRule .process .circle{
+	width: 30px;
+    height: 30px;
+    background-color: #777;
+    border-radius: 50%;
+    display: inline-block;
+	
+	
+}
+
+.configRule .process .circle span{
+	line-height: 30px;
+    display: block;
+    color: #FFF;
+    text-align: center;
+	
+}
+.configRule .process hr{
+	height: 30px;
+	/* margin-bottom:30px; */
+	width: 39%;
+    margin: 0;
+    border: none;
+    border-top: 1px solid #ddd;
+    display: inline-block;
+	
+}
+
+
+/*config2*/
+.config2 .left{
+	background: #eee;
+    /* padding: 15px;
+    margin: 0 0 15px 15px; */
+	
+}
+.config2 .list{
+	height: 500px;
+	overflow-y:auto;
+	
+}
+
+.config2 .tableCollection{
+	 min-height: 50px;
+	 text-align: center;
+}
+.config2 .tableCollection>.row{
+	margin-right: 5px;
+	background: #fff;
+	padding: 15px 0;
+}
+
+.config2 .tableCollection hr{
+	width: 200px;
+	margin: 0;
+	display: inline-block;
+	
+}
+
+/* condition */
+.config2 .tableCollection .condition>div{
+	/* display: inline-block; */
+}
+.config2 .tableCollection .conditionRow{
+	margin-top: 20px;
+	height: 450px;
+	border: 8px solid #fff;
+	overflow-y: auto;
+    overflow-x: hidden;
+	padding: 0px;
+}
+
+.config2 .tableCollection .conditionRow .inGroupRow{
+	    margin-top: 15px;
+}
+.config2 .tableCollection .conditionRow .inGroup{
+	background: #eee;
+    margin: 10px 0;
+    padding: 10px 0;
+}
+/* guanlian */
+.config2 .tableCollection .associatedWindow{
+	position: absolute;
+	z-index:10;
+	left: -210px;
+}
+/* template1 */
+.associate .associateImag>.row{
+	padding: 15px;
+}
+.associate .associateField{
+	padding-top: 10px
+}
+.associateField li{
+	display:inline-block;
+	
+}
+.associateField li.field{
+	width: 121px;
+}
+.associate .associateImag li{
+	/* display:inline-block; */
+	float: left;
+    border: 1px solid #ccc;
+    padding: 15px 25px;;
+    margin: 0;
+}
+
+/* step1*/
+
+.config1{
+	height: 620px;
+	margin: 20px 0;
+	    padding: 25px 0;
+}

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huawei.spring.mappers.SQLScanMapper.SqlScriptMapper">
+
+  <sql id="sqlScriptColumnList">
+    id, name, version, size, filePath, baseType, packageId, taskId, uploaded
+  </sql>
+  <resultMap id="classSQLScript" type="com.huawei.spring.catalogue.SQLScan.SqlScript">
+    <id column="id" property="id" jdbcType="VARCHAR"/>
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="version" property="version" jdbcType="VARCHAR" />
+    <result column="size" property="size" jdbcType="BIGINT" />
+    <result column="filePath" property="filePath" jdbcType="VARCHAR"/>
+    <result column="baseType" property="baseType" jdbcType="VARCHAR"/>
+    <result column="packageId" property="packageId" jdbcType="VARCHAR"/>
+    <result column="uploaded" property="uploaded" />
+    <result column="taskId" property="taskId" jdbcType="VARCHAR"/>
+  </resultMap>
+  
+  <select id="findBytaskId" parameterType="String" resultMap="classSQLScript">
+    SELECT <include refid="sqlScriptColumnList"/> FROM sql_script WHERE taskId = #{taskId}
+  </select>
+
+  <insert id="addSqlScript" parameterType="com.huawei.spring.catalogue.SQLScan.SqlScript">
+    INSERT INTO
+    sql_script(id, name, version, size, filePath, baseType, packageId, taskId, uploaded)
+    VALUES (#{id}, #{name}, #{version}, #{size}, #{filePath}, #{baseType}, #{packageId}, #{taskId}, #{uploaded})
+  </insert>
+
+  <insert id="addSqlScriptByBatch" parameterType="java.util.List">
+    INSERT INTO sql_script (id, name, version, size, filePath, baseType, packageId, taskId, uploaded)
+    VALUES
+    <foreach collection="list" item="item" index="index" separator=",">
+      (#{item.id, jdbcType=VARCHAR}, #{item.name, jdbcType=VARCHAR}, #{item.version, jdbcType=VARCHAR}, #{item.size, jdbcType=BIGINT}, #{item.filePath, jdbcType=VARCHAR}, #{item.baseType, jdbcType=VARCHAR}, #{item.packageId, jdbcType=VARCHAR}, #{item.taskId, jdbcType=VARCHAR}, #{item.uploaded})
+    </foreach>
+  </insert>
+
+  <delete id="deleteByTaskId" parameterType="String">
+    DELETE FROM sql_script WHERE taskId = #{taskId} limit 100
+  </delete>
+
+</mapper>

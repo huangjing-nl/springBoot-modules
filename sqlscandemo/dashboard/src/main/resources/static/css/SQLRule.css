@@ -1,0 +1,201 @@
+@CHARSET "UTF-8";
+.SQLScan .row{
+	padding:5px 0;
+}
+.clear:AFTER{
+	clear: both;
+    content: '';
+    display: block;
+}
+/* .SQLScan .cusTable{
+	border: 1px solid #ccc;
+}*/
+
+.singleFile .cusTable{
+	border: 1px solid #ccc;
+}
+
+.singleFile .loading{
+	background: #f9f9f9 url(../images/loading.gif) no-repeat scroll center center content-box !important;
+	z-index: 10000;
+	width: 80%;
+	height: 25px;
+	position: absolute;
+	display: none;
+}
+
+.singSQL .cusTable{
+	border: 1px solid #ccc;
+}
+.SQLScan .operation li,.taskMaintain .operation li,.versionMaintain .operation li{
+	display:inline-block;
+	margin: 0 5px;
+	cursor: pointer;
+} 
+.SQLruleTable{
+	
+	max-height: 720px;
+}
+.addRule .configPanel>div,.configRuleAndBlock .configPanel>div,.addVersion .configPanel>div,.projectVTask .configPanel>div{
+	padding:10px 0;
+}
+
+/* .addRule .data-dropdown-set{
+	left:0;
+	min-height:30px;
+	max-height: 240px;
+    overflow-y: auto;
+} */
+/* .addRule .cancelPosition{
+	position: initial !important;
+} */
+.configRuleAndBlock .ruleList{
+	min-height:200px;
+	max-height:450px;
+	overflow-y:auto; 
+	border: 1px solid #dddddd;
+}
+.businessRules .rule{
+	position: relative;
+}
+
+.businessRules .rule>div{
+	display: inline-block;
+}
+
+.businessRules .rule .arrows{
+	display :none;
+	position: absolute;
+	top: 30%;
+}
+.businessRules .rule .arrows span{
+	font-size: 80px;
+	margin-left: 75px;
+}
+.businessRules .selectedRule{
+	min-height:200px;
+	max-height:450px;
+	min-width: 300px;
+    max-width: 400px;
+	overflow-y:auto; 
+}
+.businessRules .allRule{
+	min-height:200px;
+	max-height:450px;
+	overflow-y:auto; 
+	min-width: 300px;
+    max-width: 400px;
+    margin-left: 150px;
+}
+.businessRules .noSelectRule{
+	  margin-left: 250px;
+	
+	
+	
+}
+
+.businessRules .noSelectRule .addOk{
+	    margin-left: 20px;
+	    display: none;
+}
+
+.businessRules .selectRule .addRemove{
+	margin-left: 20px;
+	    display: none;
+}
+
+
+.ruleSelected{
+	background: #dddddd;
+}
+/* .businessRules .selectedRule li:hover,.businessRules .allRule li:hover{
+	background: #ddd;
+} */
+
+.businessRules .layui-layer{
+	position:absolute;
+	left:0 !important;
+	top:30px !important;
+	width:100%;
+}
+/* .businessRules .ruleList .selectFlag select{
+	 float: right;
+	 pointer-events: none; 
+} */
+
+/* .businessRules .selectRule .delectedFlag{
+	 pointer-events: none; 
+} */
+.configRuleAndBlock .ruleList .selectFlag{
+	 float: right;
+	 pointer-events: none; 
+}
+
+/*versionMaintain*/
+
+.versionMaintain .row{
+	padding:5px 0;
+}
+
+.versionMaintain .cusTable{
+	border: 1px solid #ccc;
+}
+/* .versionMaintain .operation li{
+	display:inline-block;
+	cursor: pointer;
+} */
+
+/* taskMaintain */
+.taskMaintain .row{
+	padding:5px 0;
+}
+
+.taskMaintain .cusTable{
+	border: 1px solid #ccc;
+}
+/* .taskMaintain .operation li{
+	display:inline-block;
+	cursor: pointer;
+} */
+/*$dirty表单有填写记录 $valid	字段内容合法的$invalid	字段内容是非法的$pristine	表单没有填写记录*/
+ .ng-invalid.ng-dirty {
+            border-color: #FA787E;
+        }
+
+
+ .ng-valid.ng-dirty {
+      border-color:  #ccc;
+  }
+
+   .ng-pristine {/*表单没有填写记录  */
+       border-color: #ccc;
+   }
+/*  form.ng-invalid{
+ border-color: #FA787E;
+ } */
+ 
+ 
+.singleFile .fileSQLTable{
+    min-height: 20px;
+    max-height: 170px;
+    overflow-y: auto;
+ 
+ }
+ .singSQL .SQLTable{
+    min-height: 20px;
+    max-height: 250px;
+    overflow-y: auto;
+ }
+
+.singSQL .codeText{
+	height: 170px;
+}
+.singSQL .loading1{
+	position: absolute;
+	width: 70px;
+	height: 24px;
+	left: 10px;
+	top: 5px;
+	background: #37c47a url(../images/loading.gif) no-repeat scroll center center content-box !important;
+	display: none;
+}

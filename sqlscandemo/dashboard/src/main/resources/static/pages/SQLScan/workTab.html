@@ -1,0 +1,204 @@
+<ul id="myTab" class="nav nav-tabs">
+    <li class="active">
+        <a href="#singleSQL" data-toggle="tab">单SQL检查</a>
+    </li>
+    <li>
+        <a href="#singleFile" data-toggle="tab">脚本检查</a>
+    </li>
+</ul>
+
+<div id="myTabContent" class="tab-content">
+    <div class="tab-pane fade " id="singleFile">
+        <!--单脚本执行-->
+        <div class="container-fluid singleFile">
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label for="business"><span>*</span>业务</label>
+                        <div>
+                            <select id="business" name="business" class="form-control" ng-model="selectBusinessTypeValue"
+                                    ng-options="business.name as business.name for business in businessTypeLists">
+                                <!--<option value="">&#45;&#45;请选择业务&#45;&#45;</option>-->
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="type"><span>*</span>库类型</label>
+                        <div>
+                            <select id="type" name="type" class="form-control" ng-model="selectTypeValue"
+                                    ng-options="type.name as type.name for type in typeLists">
+                                <!--<option value="">&#45;&#45;请选择库类型&#45;&#45;</option>-->
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label for="scriptVersion"><span>*</span>版本号</label>
+                        <input name="scriptVersion" type="text" class="form-control" ng-model="scriptVersion"
+                               placeholder="请输入版本号">
+                        <!--<span style="color:red" ng-show="addRuleFrom.$submitted && addRuleFrom.name.$invalid">名称未通过校验。</span>-->
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        单脚本执行
+                    </div>
+                    <div class="panel-body configPanel kv-main">
+                        <div>
+                            <label for="name">*脚本文件(暂时只支持 zip,rar,tar,sql后缀文件)</label>
+                            <form enctype="multipart/form-data">
+                                    <div class="form-group">
+                                        <!--  <input id="SQLFileUpload" class="file" type="file" multiple data-preview-file-type="any"> -->
+                                        <input name="file" id="SQLFileUpload" type="file" class="file">
+
+                                    </div>
+                            </form>
+                        </div>
+                        <div  id="elErrorContainer"></div>
+                        <div class="fileTable" style="display:none;">
+                            <table class="table table-striped cusTable">
+                                <thead>
+                                <tr>
+                                    <!-- <th>id</th> -->
+                                    <th>序号</th>
+                                    <th>文件名</th>
+                                    <th>版本号</th>
+                                    <th>上传时间</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="fileInfo in fileInfos">
+                                    <!--  <td>{{fileInfo.id}}</td> -->
+                                    <td>{{$index+1}}</td>
+                                    <td>{{fileInfo.fileName}}</td>
+                                    <td>{{fileInfo.version}}</td>
+                                    <td>{{fileInfo.created | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
+                                    <td style="position: relative">
+                                        <div class="loading"></div>
+                                        <a href="javascript:void(0);" class="parseButton"
+                                           ng-click="parseFileInfo(fileInfo)">{{isParse}}</a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="fileSQLTable table-responsive" style="display:none;">
+                            <table class="table table-striped cusTable">
+                                <thead>
+                                <tr>
+                                    <!-- <th>id</th> -->
+                                    <th>序号</th>
+                                    <th>结果</th>
+                                    <th>级别</th>
+                                    <th>脚本名称</th>
+                                    <th>开始行数</th>
+                                    <th>结束行数</th>
+                                    <th>状态</th>
+                                    <th>信息</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="singleSQL in singleSQLs">
+                                    <!--  <td>{{fileInfo.id}}</td> -->
+                                    <td style="width:45px;">{{$index+1}}</td>
+                                    <td style="width:80px;">{{singleSQL.head}}</td>
+                                    <td style="width:80px;">{{singleSQL.level}}</td>
+                                    <td style="width:180px;">{{singleSQL.scriptName}}</td>
+                                    <td style="width:75px;">{{singleSQL.startLineNum}}</td>
+                                    <td style="width:75px;">{{singleSQL.endLineNum}}</td>
+                                    <td style="width:50px;">{{singleSQL.status}}</td>
+                                    <td>{{singleSQL.message}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+    <div class="tab-pane fade in active" id="singleSQL">
+        <!--单SQL执行-->
+        <div class="container-fluid singSQL">
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label for="businessSQL"><span>*</span>业务</label>
+                    <div>
+                        <select id="businessSQL" name="business" class="form-control"
+                                ng-model="selectBusinessTypeValue"
+                                ng-options="business.name as business.name for business in businessTypeLists">
+                            <!--<option value="">&#45;&#45;请选择业务&#45;&#45;</option>-->
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="typeSQL"><span>*</span>库类型</label>
+                    <div>
+                        <select id="typeSQL" name="type" class="form-control" ng-model="selectTypeValue"
+                                ng-options="type.name as type.name for type in typeLists">
+                            <!-- <option value="">&#45;&#45;请选择库类型&#45;&#45;</option>-->
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label for="SQLVersion"><span>*</span>版本号</label>
+                    <input name="SQLVersion" type="text" class="form-control" ng-model="SQLVersion"
+                           placeholder="请输入版本号">
+                    <!--<span style="color:red" ng-show="addRuleFrom.$submitted && addRuleFrom.name.$invalid">名称未通过校验。</span>-->
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    单SQL执行
+                </div>
+                <div class="panel-body configPanel">
+                    <div>
+                        <label for="editor">请在下面输入SQL (提示:Tab)</label>
+                        <!-- <textarea class="form-control" rows="5" id="editor"></textarea> -->
+                        <div class="CodeMirror cm-s-base16-light " style="height: 280px;">
+                            <textarea id="editor" name="editor" class="form-control" rows="5"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="position: relative;">
+                <div class="loading1"></div>
+                <button type="button" class="btn btn-primary" ng-click="submitSQL()">&nbsp;SQL解析&nbsp;</button>
+                <!--<button type="button" class="btn btn-warning" ng-click="cancelSQL()">&nbsp;取&nbsp;&nbsp;消&nbsp;</button>-->
+            </div>
+            </BR>
+            <div class="SQLTable table-responsive" style="display:none;">
+                <table class="table table-striped cusTable">
+                    <thead>
+                    <tr>
+                        <!-- <th>id</th> -->
+                        <th>序号</th>
+                        <th>结果</th>
+                        <th>级别</th>
+                        <th>开始行数</th>
+                        <th>结束行数</th>
+                        <th>状态</th>
+                        <th>信息</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="SQLScript in SQLScripts">
+                        <!--  <td>{{fileInfo.id}}</td> -->
+                        <td style="width:45px;">{{$index+1}}</td>
+                        <td style="width:80px;">{{SQLScript.head}}</td>
+                        <th style="width:80px;">{{SQLScript.level}}</th>
+                        <td style="width:75px;">{{SQLScript.startLineNum}}</td>
+                        <td style="width:75px;">{{SQLScript.endLineNum}}</td>
+                        <td style="width:45px;">{{SQLScript.status}}</td>
+                        <td>{{SQLScript.message}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

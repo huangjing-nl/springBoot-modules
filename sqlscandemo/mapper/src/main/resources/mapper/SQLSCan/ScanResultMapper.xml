@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huawei.spring.mappers.SQLScanMapper.ScanResultMapper" >
+  <sql id="columns">
+    id, name, version, created, status, head, level, message, startLineNum, endLineNum, sqlString, scriptName, operType, ruleId, ruleName, blockId, scriptId, taskId, business, operator
+  </sql>
+  <resultMap id="classScanResult" type="com.huawei.spring.catalogue.SQLScan.ScanResult" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="version" property="version" jdbcType="VARCHAR" />
+    <result column="created" property="created" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="head" property="head" jdbcType="VARCHAR" />
+    <result column="level" property="level" jdbcType="VARCHAR" />
+    <result column="message" property="message" jdbcType="VARCHAR" />
+    <result column="startLineNum" property="startLineNum" jdbcType="VARCHAR" />
+    <result column="endLineNum" property="endLineNum" jdbcType="VARCHAR" />
+    <result column="sqlString" property="sqlString" />
+    <result column="scriptName" property="scriptName" jdbcType="VARCHAR"/>
+    <result column="operType" property="operType" jdbcType="VARCHAR"/>
+    <result column="ruleId" property="ruleId" jdbcType="VARCHAR" />
+    <result column="ruleName" property="ruleName" jdbcType="VARCHAR" />
+    <result column="blockId" property="blockId" jdbcType="VARCHAR" />
+    <result column="scriptId" property="scriptId" jdbcType="VARCHAR" />
+    <result column="taskId" property="taskId" jdbcType="VARCHAR" />
+    <result column="business" property="business" jdbcType="VARCHAR" />
+    <result column="operator" property="operator" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="findAll" resultMap="classScanResult">
+    SELECT <include refid="columns"/> FROM scan_result
+  </select>
+
+  <select id="findByTaskId" resultMap="classScanResult" parameterType="String">
+    SELECT <include refid="columns"/> FROM scan_result WHERE taskId = #{taskId}
+  </select>
+
+  <select id="findByPage" resultMap="classScanResult" parameterType="com.huawei.spring.catalogue.SQLScan.Pagination">
+    SELECT <include refid="columns"/> from scan_result ORDER BY ${sort} limit #{offset}, #{rows}
+  </select>
+
+  <select id="findByPageAndTaskId" resultMap="classScanResult" parameterType="com.huawei.spring.catalogue.SQLScan.Pagination">
+    SELECT <include refid="columns"/> from scan_result WHERE taskId = #{taskId} ORDER BY ${sort} limit #{offset}, #{rows}
+  </select>
+
+  <select id="getCountByTime" resultType="Long" parameterType="com.huawei.spring.catalogue.SQLScan.ResultReport">
+    SELECT COUNT(id) from scan_result WHERE CREATED BETWEEN #{startTimeStr} AND #{endTimeStr}
+  </select>
+
+  <select id="getCountByTimeAndBusiness" resultType="Long" parameterType="com.huawei.spring.catalogue.SQLScan.ResultReport">
+    SELECT COUNT(id) from scan_result WHERE CREATED BETWEEN #{startTimeStr} AND #{endTimeStr} AND business = #{business}
+  </select>
+
+  <resultMap id="classReportMap" type="com.huawei.spring.catalogue.SQLScan.ReportMap">
+    <result column="keyword" property="keyword"/>
+    <result column="k" property="key"/>
+    <result column="num" property="value" />
+  </resultMap>
+  <select id="getBusinessGroup" resultMap="classReportMap" parameterType="com.huawei.spring.catalogue.SQLScan.ResultReport">
+    SELECT business as keyword, business as k, COUNT(id) as num FROM scan_result WHERE CREATED BETWEEN #{startTimeStr} AND #{endTimeStr} GROUP BY business
+  </select>
+
+  <select id="getRuleGroup" resultMap="classReportMap" parameterType="com.huawei.spring.catalogue.SQLScan.ResultReport">
+    SELECT RULENAME as keyword, RULENAME as k, COUNT(id) as num FROM scan_result WHERE CREATED BETWEEN #{startTimeStr} AND #{endTimeStr} AND business = #{business} GROUP BY RULENAME
+  </select>
+
+  <select id="getTopGroup" resultMap="classReportMap" parameterType="com.huawei.spring.catalogue.SQLScan.ResultReport">
+    SELECT RULENAME as keyword, RULENAME as k, COUNT(id) as num FROM scan_result WHERE CREATED BETWEEN #{startTimeStr} AND #{endTimeStr} GROUP BY RULENAME ORDER BY num DESC LIMIT 10
+  </select>
+
+  <insert id="addScanResult" parameterType="com.huawei.spring.catalogue.SQLScan.ScanResult" >
+    INSERT INTO scan_result (id, name, version, created, status, head, level, message, startLineNum, endLineNum, sqlString, scriptName, operType, ruleId, ruleName, blockId, scriptId, taskId, business, operator)
+    VALUES
+    (#{id}, #{name}, #{version}, #{created}, #{status}, #{head}, #{level}, #{message}, #{startLineNum}, #{endLineNum}, #{sqlString}, #{scriptName}, #{operType}, #{ruleId}, #{ruleName}, #{blockId}, #{scriptId}, #{taskId}, #{business}, #{operator})
+  </insert>
+
+  <insert id="addSqlResultByBatch" parameterType="java.util.List">
+    INSERT INTO scan_result (id, name, version, created, status, head, level, message, startLineNum, endLineNum, sqlString, scriptName, operType, ruleId, ruleName, blockId, scriptId, taskId, business, operator)
+    VALUES
+    <foreach collection="list" item="item" index="index" separator=",">
+      (#{item.id}, #{item.name}, #{item.version}, #{item.created}, #{item.status}, #{item.head}, #{item.level}, #{item.message}, #{item.startLineNum, jdbcType=INTEGER}, #{item.endLineNum, jdbcType=INTEGER}, #{item.sqlString}, #{item.scriptName}, #{item.operType}, #{item.ruleId}, #{item.ruleName}, #{item.blockId}, #{item.scriptId}, #{item.taskId}, #{item.business}, #{item.operator})
+    </foreach>
+  </insert>
+
+  <delete id="deleteByTaskId" parameterType="String" >
+    DELETE FROM scan_result WHERE taskId = #{taskId} limit 1000
+  </delete>
+
+</mapper>

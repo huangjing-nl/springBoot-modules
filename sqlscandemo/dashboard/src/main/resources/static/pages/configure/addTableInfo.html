@@ -1,0 +1,76 @@
+<div class="container-fluid addTableInfo">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<span>{{titleName}}</span>表信息
+				</div>
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-md-6">
+							<form name="addTableInfoFrom" autocomplete="off" ng-submit="addTableInfoFrom.$valid && addTableSubmit(addTableInfoFrom)" novalidate>
+								<div class="form-group">
+									<label for="name">*表名称</label>
+									<input name="tableName" type="text" class="form-control" ng-model="tableName" placeholder="请输入规则名称" required>
+									<span style="color:red" ng-show="addTableInfoFrom.$submitted && addTableInfoFrom.tableName.$invalid">表名称未通过校验。</span>
+								</div>
+
+								<div class="form-group">
+									<label for="name">*所属业务</label>
+									<div>
+										<select name="serviceName" class="form-control"
+											ng-model="selectBusiness"
+											ng-options="business.serviceName as business.serviceName for business in businessList"
+											required>
+											<option value="">--请选择所属业务--</option>
+											<!-- <option value="0"><input type="text" class="form-control" placeholder="请输入搜索名称" /></option> -->
+										</select>
+									</div>
+									<span style="color:red" ng-show="addTableInfoFrom.$submitted && addTableInfoFrom.level.$invalid">所属业务未通过校验。</span>
+								</div>
+
+								<div class="form-group">
+									<label for="name">*推送文件路径</label>
+									<input name="filePath" type="text" class="form-control" ng-model="filePath" placeholder="请输入推送文件路径" required>
+									<span style="color:red" ng-show="addTableInfoFrom.$submitted && addTableInfoFrom.filePath.$invalid">推送文件路径未通过校验。</span>
+								</div>
+
+								<div class="form-group">
+									<label for="name">*域分隔符</label>
+									<input name="delimeter" type="number" class="form-control" ng-model="delimeter" placeholder="请输入域分隔符" required>
+									<span style="color:red" ng-show="addTableInfoFrom.$submitted && addTableInfoFrom.delimeter.$invalid">域分隔符未通过校验。</span>
+								</div>
+
+								<div class="form-group">
+									<label for="name">*列总数</label>
+									<input name="colNumber" type="number" class="form-control" ng-model="colNumber"placeholder="请输入列总数" required>
+									<span style="color:red" ng-show="addTableInfoFrom.$submitted && addTableInfoFrom.colNumber.$invalid">列总数未通过校验。</span>
+								</div>
+
+								<div class="form-group">
+									<label for="name">*检查行数</label>
+									<input name="rowNumber" type="number" class="form-control" ng-model="rowNumber" placeholder="请输入检查行数" required>
+									<span style="color:red" ng-show="addTableInfoFrom.$submitted && addTableInfoFrom.rowNumber.$invalid">检查行数未通过校验。</span>
+								</div>
+
+								<div class="form-group">
+									<button type="submit" class="btn btn-primary">
+										<span class="glyphicon glyphicon-ok"></span><span>&nbsp;提&nbsp;&nbsp;交&nbsp;</span>
+									</button>
+									<button type="reset" class="btn btn-warning" ng-click="resetTableInfo()">
+										<span class="glyphicon glyphicon-refresh"></span><span>&nbsp;重&nbsp;&nbsp;置&nbsp;</span>
+									</button>
+									<a href="#/configureTableInfo">
+										<button type="button" class="btn btn-primary pull-right">
+											<span class="glyphicon glyphicon-share-alt"></span><span>&nbsp;返&nbsp;&nbsp;回&nbsp;</span>
+										</button>
+									</a>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

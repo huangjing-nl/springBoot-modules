@@ -1,0 +1,74 @@
+<div class="container-fluid projectVTask">
+	<div class="ucd-panel-heading">
+		项目版本执行
+	</div>
+	<div class="ucd-panel panel-default">
+
+		<div class="panel-body configPanel">
+			<form name="projectVTaskFrom" autocomplete="off" novalidate>
+				<div class="row">
+					<div class="form-group col-md-6">
+						<label for="name"><span>*</span>项目版本</label>
+						<div>
+							<select name="projectV" class="form-control" ng-model="selectprojectV" ng-options="version.id as version.name for version in versionLists" required>
+								<option value="">--请选择已有的项目版本--</option>
+							</select>
+							<span style="color:red" ng-show="projectVTaskFrom.projectV.$dirty && projectVTaskFrom.projectV.$invalid">
+										<span ng-show="projectVTaskFrom.projectV.$error.required">请选择项目版本！</span>
+							</span>
+							<span style="color:red" ng-show="selectprojectV">请选择项目版本！</span>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group col-md-6">
+						<label for="name"><span>*</span>版本号</label>
+						<div>
+							<select name="projectVNo" class="form-control" ng-model="selectprojectVNo" ng-options="vNo.id as vNo.name for vNo in projectVNoLists" required>
+								<option value="">--请选择已有的项目的版本号--</option>
+							</select>
+							<span style="color:red" ng-show="projectVTaskFrom.projectVNo.$dirty && projectVTaskFrom.projectVNo.$invalid">
+										<span ng-show="projectVTaskFrom.projectVNo.$error.required">请选择项目版本号！</span>
+							</span>
+							<span style="color:red" ng-show="flag2">项目版本未选择!</span>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="form-group col-md-6">
+						<label for="name"><span>*</span>轮次</label>
+						<div>
+							<select name="round" class="form-control" ng-model="selectRound" ng-options="round.id as round.name for round in roundLists" required>
+								<option value="">--请选择已有的轮次--</option>
+							</select>
+							<span style="color:red" ng-show="projectVTaskFrom.round.$dirty && projectVTaskFrom.round.$invalid">
+										<span ng-show="projectVTaskFrom.round.$error.required">请选择轮次！</span>
+							</span>
+							<span style="color:red" ng-show="flag3">轮次未选择!</span>
+						</div>
+					</div>
+				</div>
+			</form>
+
+			<div class="row">
+				<div class="form-group col-md-6">
+					<label for="name"><span>*</span>上传文件</label>
+					<form enctype="multipart/form-data">
+						<div class="form-group">
+							<!--  <input id="SQLFileUpload" class="file" type="file" multiple data-preview-file-type="any"> -->
+							<input id="projectTaskFileUpload" type="file" multiple class="file" name="file" data-show-caption="true">
+							<!--  <span style="color:red" ng-show="flag3">轮次未选择!</span> -->
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div>
+		<button type="button" class="btn btn-primary" ng-click="taskSubmit()">&nbsp;提&nbsp;&nbsp;交&nbsp;</button>
+		<button type="button" class="btn btn-warning">&nbsp;取&nbsp;&nbsp;消&nbsp;</button>
+
+	</div>
+</div>

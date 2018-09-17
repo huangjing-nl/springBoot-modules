@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huawei.spring.mappers.SQLScanMapper.RelationMapper">
+
+  <sql id="columnsLevel">
+    id, level
+  </sql>
+  <resultMap id="Level" type="com.huawei.spring.catalogue.SQLScan.RuleLevel">
+    <id column="id" property="id" jdbcType="VARCHAR"/>
+    <result column="level" property="level" jdbcType="VARCHAR"/>
+  </resultMap>
+
+  <sql id="columnsBaseType">
+    id, name
+  </sql>
+  <resultMap id="BaseType" type="com.huawei.spring.catalogue.SQLScan.BaseType">
+    <id column="id" property="id" jdbcType="VARCHAR"/>
+    <result column="name" property="name" jdbcType="VARCHAR"/>
+  </resultMap>
+
+  <sql id="columnsBusiness">
+    id, name
+  </sql>
+  <resultMap id="Business" type="com.huawei.spring.catalogue.SQLScan.Business">
+    <id column="id" property="id" jdbcType="VARCHAR"/>
+    <result column="name" property="name" jdbcType="VARCHAR"/>
+  </resultMap>
+
+  <select id="findAllLevel" resultMap="Level">
+    SELECT <include refid="columnsLevel"/> FROM level
+  </select>
+
+  <select id="findAllBaseType" resultMap="BaseType">
+    SELECT <include refid="columnsBaseType"/> FROM base_type
+  </select>
+
+  <select id="findAllBusiness" resultMap="Business">
+    SELECT <include refid="columnsBusiness"/> FROM business
+  </select>
+
+  <select id="findLevelById" resultMap="Level" parameterType="String">
+    SELECT <include refid="columnsLevel"/> FROM level WHERE id=#{id}
+  </select>
+
+  <select id="findBaseTypeById" resultMap="BaseType" parameterType="String">
+    SELECT <include refid="columnsBaseType"/> FROM base_type WHERE id=#{id}
+  </select>
+
+  <select id="findBusinessById" resultMap="Business" parameterType="String">
+    SELECT <include refid="columnsBusiness"/> FROM business WHERE id=#{id}
+  </select>
+
+  <resultMap id="classORLB" type="com.huawei.spring.catalogue.SQLScan.Oper_Rule_Level_Business">
+    <id property="id" column="id"/>
+    <association property="business" javaType="com.huawei.spring.catalogue.SQLScan.Business">
+      <id property="id" column="b_id"/>
+      <result property="name" column="b_name"/>
+    </association>
+    <association property="operType" javaType="com.huawei.spring.catalogue.SQLScan.OperType">
+      <id property="id" column="o_id"/>
+      <result property="name" column="o_name"/>
+    </association>
+    <association property="rule" javaType="com.huawei.spring.catalogue.SQLScan.ScanRule">
+      <id property="id" column="r_id"/>
+      <result property="name" column="r_name"/>
+    </association>
+    <association property="level" javaType="com.huawei.spring.catalogue.SQLScan.RuleLevel">
+      <id property="id" column="l_id"/>
+      <result property="level" column="l_level"/>
+    </association>
+    <!--<id property="operName" column="oper_name"/>-->
+    <!--<id property="ruleId" column="rule_id"/>-->
+    <!--<id property="levelId" column="level_id"/>-->
+    <!--<id property="businessId" column="business_id"/>-->
+    <!--<collection property="list" javaType="ArrayList" column="{operName=oper_name, ruleId=rule_id, levelId=level_id, businessId=business_id}" select="findByPrimary"/>-->
+  </resultMap>
+  <select id="findORLBById" resultMap="classORLB" parameterType="String">
+    SELECT id, business_Id AS b_id, oper_Name AS o_name, rule_Id AS r_id, level_Id AS l_id FROM oper_rule_level_business
+    WHERE id = #{id}
+  </select>
+
+  <select id="getOrlbCounts" resultType="Integer">
+    SELECT COUNT(id) FROM oper_rule_level_business
+  </select>
+
+  <select id="getOrlbCountsByBusiness" resultType="Integer" parameterType="com.huawei.spring.catalogue.SQLScan.Pagination">
+    SELECT COUNT(orlb.ID)
+    FROM oper_rule_level_business orlb, business b, oper_type o, scan_rule r, level l
+    WHERE orlb.BUSINESS_ID = b.id AND orlb.OPER_NAME = o.name AND orlb.RULE_ID = r.ID AND orlb.LEVEL_ID = l.id
+    AND b.name LIKE #{business}
+  </select>
+
+  <select id="getOrlbCountsByOperType" resultType="Integer" parameterType="com.huawei.spring.catalogue.SQLScan.Pagination">
+    SELECT COUNT(orlb.ID)
+    FROM oper_rule_level_business orlb, business b, oper_type o, scan_rule r, level l
+    WHERE orlb.BUSINESS_ID = b.id AND orlb.OPER_NAME = o.name AND orlb.RULE_ID = r.ID AND orlb.LEVEL_ID = l.id
+    AND o.name LIKE #{operType}
+  </select>
+
+  <select id="getOrlbCountsByBusinessAndOper" resultType="Integer" parameterType="com.huawei.spring.catalogue.SQLScan.Pagination">
+    SELECT COUNT(orlb.ID)
+    FROM oper_rule_level_business orlb, business b, oper_type o, scan_rule r, level l
+    WHERE orlb.BUSINESS_ID = b.id AND orlb.OPER_NAME = o.name AND orlb.RULE_ID = r.ID AND orlb.LEVEL_ID = l.id
+    AND b.name LIKE #{business} AND o.name LIKE #{operType}
+  </select>
+
+  <select id="findOrlbsByPage" resultMap="classORLB" parameterType="com.huawei.spring.catalogue.SQLScan.Pagination">
+    SELECT orlb.ID AS id, b.id AS b_id, b.name AS b_name, o.id AS o_id, o.name AS o_name, r.ID AS r_id, r.name AS r_name, l.id AS l_id, l.level AS l_level
+    FROM oper_rule_level_business orlb, business b, oper_type o, scan_rule r, level l
+    WHERE orlb.BUSINESS_ID = b.id AND orlb.OPER_NAME = o.name AND orlb.RULE_ID = r.ID AND orlb.LEVEL_ID = l.id
+    ORDER BY #{sort} limit #{offset}, #{rows}
+  </select>
+
+  <select id="findOrlbsByPageAndBusiness" resultMap="classORLB" parameterType="com.huawei.spring.catalogue.SQLScan.Pagination">
+    SELECT orlb.ID AS id, b.id AS b_id, b.name AS b_name, o.id AS o_id, o.name AS o_name, r.ID AS r_id, r.name AS r_name, l.id AS l_id, l.level AS l_level
+    FROM oper_rule_level_business orlb, business b, oper_type o, scan_rule r, level l
+    WHERE orlb.BUSINESS_ID = b.id AND orlb.OPER_NAME = o.name AND orlb.RULE_ID = r.ID AND orlb.LEVEL_ID = l.id
+    AND b.name LIKE #{business}
+    ORDER BY #{sort} limit #{offset}, #{rows}
+  </select>
+
+  <select id="findOrlbsByPageAndOperType" resultMap="classORLB" parameterType="com.huawei.spring.catalogue.SQLScan.Pagination">
+    SELECT orlb.ID AS id, b.id AS b_id, b.name AS b_name, o.id AS o_id, o.name AS o_name, r.ID AS r_id, r.name AS r_name, l.id AS l_id, l.level AS l_level
+    FROM oper_rule_level_business orlb, business b, oper_type o, scan_rule r, level l
+    WHERE orlb.BUSINESS_ID = b.id AND orlb.OPER_NAME = o.name AND orlb.RULE_ID = r.ID AND orlb.LEVEL_ID = l.id
+    AND o.name LIKE #{operType}
+    ORDER BY #{sort} limit #{offset}, #{rows}
+  </select>
+
+  <select id="findOrlbsByPageAndBusinessAndOperType" resultMap="classORLB" parameterType="com.huawei.spring.catalogue.SQLScan.Pagination">
+    SELECT orlb.ID AS id, b.id AS b_id, b.name AS b_name, o.id AS o_id, o.name AS o_name, r.ID AS r_id, r.name AS r_name, l.id AS l_id, l.level AS l_level
+    FROM oper_rule_level_business orlb, business b, oper_type o, scan_rule r, level l
+    WHERE orlb.BUSINESS_ID = b.id AND orlb.OPER_NAME = o.name AND orlb.RULE_ID = r.ID AND orlb.LEVEL_ID = l.id
+    AND b.name LIKE #{business} AND o.name LIKE #{operType}
+    ORDER BY #{sort} limit #{offset}, #{rows}
+  </select>
+
+  <delete id="deleteORLBByRuleId" parameterType="String">
+    DELETE FROM oper_rule_level_business WHERE rule_id = #{ruleId}
+  </delete>
+
+  <delete id="deleteORLBById" parameterType="String">
+    DELETE FROM oper_rule_level_business WHERE id = #{id}
+  </delete>
+
+  <insert id="addORLB" parameterType="com.huawei.spring.catalogue.SQLScan.Oper_Rule_Level_Business">
+    INSERT INTO oper_rule_level_business (id, business_Id, oper_Name, rule_Id, level_Id) VALUES (#{id}, #{business.id}, #{operType.name}, #{rule.id}, #{level.id})
+  </insert>
+
+  <update id="updateOrlb" parameterType="com.huawei.spring.catalogue.SQLScan.Oper_Rule_Level_Business">
+    UPDATE oper_rule_level_business
+    <trim prefix="set" suffixOverrides=",">
+      <if test="business.id!=null">business_id = #{business.id},</if>
+      <if test="operType.name!=null">oper_name = #{operType.name},</if>
+      <if test="rule.id!=null">rule_id = #{rule.id},</if>
+      <if test="level.id!=null">level_id = #{level.id},</if>
+    </trim> WHERE id = #{id}
+  </update>
+</mapper>

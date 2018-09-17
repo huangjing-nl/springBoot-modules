@@ -1,0 +1,47 @@
+<div class="container-fluid sqlReport">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group setDate">
+                <label>查询时间:</label><!--<span style="color:red">(请选择至少大于当前时间1个小时)</span>-->
+                <div>
+                    <input size="16" type="text" ng-model="startDate" readonly class="form-control startDate" placeholder="请选择开始时间"/>
+                    <span>----</span>
+                    <input size="16" type="text" ng-model="endDate" readonly  class="form-control endDate" placeholder="请选择开始时间"/>
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-primary" ng-click="changeSetDateData()">&nbsp;查&nbsp;&nbsp;询&nbsp;</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--排行榜和柱状图-->
+    <div class="row setHeightTop">
+        <div class="col-md-6" style="height: 100%">
+            <div class="form-group" style="height: 100%">
+                <div class="createPieGraph" name="createPieGraph" style="width: 100%;height:100%;"></div>
+            </div>
+        </div>
+        <div class="col-md-6" style="height: 100%">
+            <div class="form-group" style="height: 100%">
+                <div class="createBarRanking" name="createBarRanking" style="width: 100%;height:100%;"></div>
+            </div>
+        </div>
+    </div>
+    <!--柱状图-->
+    <div class="row setHeightTop2">
+        <div class="col-md-12" style="height: 100%">
+            <div class="ruleReport form-group">
+                <div class="selectRule">
+                    <!--<label>业务类型:</label>-->
+                    <select class="form-control" ng-model="businessbTypeValue" ng-change="changeBusinessType()">
+                        <option value="{{type}}" ng-repeat="type in businessbTypes">{{type}}</option>
+                    </select>
+                </div>
+                <div class="createBarGraph" name="createBarGraph" style="width: 100%;height:100%;"></div>
+            </div>
+        </div>
+       <!-- <div class="col-md-3" style="height: 100%;background: #ffffff;">
+            <h5>此处说明</h5>
+        </div>-->
+    </div>
+</div>

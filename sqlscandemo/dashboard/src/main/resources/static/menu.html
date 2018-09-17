@@ -1,0 +1,61 @@
+<div class="container-fluid" style="height: 100%;">
+    <!-- headPage -->
+    <div class="row">
+        <nav class="navbar navbar-default ucd-navbar" ng-controller="NavCtrl">
+            <div class="navbar-header" style="width: 100%;">
+                <a class="navbar-brand ucd-navbar-brand" href="#/">Pandora 测试平台</a>
+                <div class="peopleInfo">
+                    <a class="navbar-brand" ng-click="logOut();"><span class="ucd-log-out"></span></a>
+                </div>
+                <div style="display:none;" class="peopleInfo">
+                    <a class="navbar-brand"><span>dengxiujie</span>&nbsp;<span class="glyphicon glyphicon-user"></span></a>
+                </div>
+                <div class="peopleInfo">
+                    <a class="navbar-brand"><span class="ucd-question-sign"></span></a>
+                </div>
+            </div>
+        </nav>
+        <div class="header-shadow"></div>
+    </div>
+    <!-- midllePage -->
+    <div class="row middlePageH ucd-middlePageH">
+        <div class="col-md-2 col-xs-3 sidebar" ng-controller="SidebarCtrl">
+            <ul class="nav nav-pills nav-stacked oneLevelMenu">
+                <li style="display:none;">
+                    <!-- <a class="changeStatus"  ng-click="changeState1()"><i class="glyphicon glyphicon-cloud"></i>表<i ng-class="{true:'glyphicon glyphicon-chevron-up',false:'glyphicon glyphicon-chevron-down'}[menuBar1]" ></i></a> -->
+                    <a class="changeStatus" href="javascript:void(0);" ng-click="changeState1()">模块一 </a>
+                    <ul class="twoLevelMenu"  ng-hide="isHideMenu1">
+                        <li><a href="#">表信息查看</a></li>
+                        <li><a href="#">Rule配置</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <!-- <div  ng-click="changeState1()"><i class="glyphicon glyphicon-cloud"></i>历史记录<i ng-class="{true:'glyphicon glyphicon-chevron-up',false:'glyphicon glyphicon-chevron-down'}[menuBar2]" ></i></div> -->
+                    <a class="changeStatus" href="javascript:void(0);" ng-click="changeState3()">SQLScan </a>
+                    <ul class="twoLevelMenu"  ng-hide="isHideMenu3">
+                        <li><a href="#/workTab">工作台</a></li>
+                        <li><a href="#/tempVersionMaintain">任务查看</a></li>
+                        <li><a href="#/tempSQLRule">SQL RULE 库</a></li>
+                        <li><a href="#/tempBusiness" >业务规则配置</a></li>
+                        <li><a href="#/SQLReport" >SQL问题报表</a></li>
+                    </ul>
+                </li>
+                <!--<li style="display:none;">-->
+                <li>
+                    <a class="changeStatus" href="javascript:void(0);" ng-click="changeState2()">ODSScan</a>
+                    <ul class="twoLevelMenu"  ng-hide="isHideMenu2">
+                        <li><a href="#/configureRule">规则配置</a></li>
+                        <li><a href="#/configureTableInfo">表信息配置</a></li>
+                        <li><a href="#/configFieldInfo">字段信息配置</a></li>
+                        <li><a href="http://117.78.31.219:8075/WebReport/ReportServer">报表配置</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <!-- mainContent -->
+        <div class="col-md-10 col-xs-9 mainContent">
+            <div id="mainWindow" class="ucd-content" ng-view ng-controller="MainCtrl"> </div>
+        </div>
+        <!-- mainContent  end-->
+    </div>
+</div>

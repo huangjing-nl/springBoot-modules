@@ -1,0 +1,110 @@
+<div class="container-fluid configFieldInfo">
+	<div class="row">
+		<div class="col-md-4">
+			<h4 class="ucd-title">字段信息配置</h4>
+		</div>
+		<div class="col-md-8">
+
+			<div class="btn-toolbar pull-right" role="toolbar">
+				<a href="#/configFieldInfo/add">
+					<button type="button" class="btn btn-primary" style="margin-right: 10px;">
+						<span class="glyphicon glyphicon-plus"></span><span>&nbsp;新&nbsp;&nbsp;增&nbsp;</span>
+					</button>
+				</a>
+				<div class="btn-group">
+					<button type="button" class="btn btn-default">
+						<a href="/template/template.xlsx">
+							<span class="glyphicon glyphicon-download-alt"></span><span>&nbsp;下载模板</span>
+						</a>
+					</button>
+					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+						<span class="glyphicon glyphicon-import"></span><span>&nbsp;导&nbsp;&nbsp;入&nbsp;</span>
+					</button>
+				</div>
+			</div>
+
+			<!--<div class="btn-group pull-right">
+				<a href="/template/template.xlsx">
+					<button type="button" class="btn btn-success mybutton">
+						<span class="glyphicon glyphicon-download-alt"></span><span>&nbsp;下载模板</span>
+					</button>
+				</a>
+				<button type="button" class="btn btn-warning mybutton"
+					data-toggle="modal" data-target="#myModal">
+					<span class="glyphicon glyphicon-import"></span><span>&nbsp;&nbsp;导&nbsp;&nbsp;&nbsp;入&nbsp;</span>
+				</button>
+			</div>-->
+		 </div>
+	</div>
+
+	<!--<div class="row">
+		<div class="col-md-12">
+			<div  id="toolbarField">
+				<a href="#/configFieldInfo/add">
+					<button type="button" class="btn btn-primary">
+						<span class="glyphicon glyphicon-plus"></span><span>&nbsp;新&nbsp;&nbsp;增&nbsp;</span>
+					</button>
+				</a>
+			</div>
+		</div>
+	</div>-->
+
+	<div class="bs-example">
+		<table style="table-layout: fixed;" data-toggle="table" id="configFieldInfo" class="tabResults ucd-table">
+		</table>
+	</div>
+
+
+	<!-- 模态框（Modal） -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content" style="width: 750px;">
+				<div class="modal-header">
+					<!-- 关闭按钮 -->
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+					<!-- 标题 -->
+					<!--<h3 class="modal-title" data-ng-bind='results.title'></h3>-->
+					<h4 class="modal-title" id="myModalLabel">请选择导入文件</h4>
+				</div>
+				<div class="modal-body">
+					<label for="name">*EXCEL文件（只支持.xlsx后缀文件）</label>
+					<form enctype="multipart/form-data">
+						<div class="form-group">
+							<input name="file" id="excelFileUpload" class="file" type="file" />
+						</div>
+					</form>
+					<div id="erroDescript" style="display:none;" class="table-responsive uploadResult">
+						<table class="table table-striped ucd-specail-table" >
+				    		<thead>
+								<tr>
+									<!-- <th>id</th> -->
+									<th>序号</th>
+									<th>行数</th>
+									<!-- <th>列名</th> -->
+									<th>错误描述</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="no-records-found" ng-if="uploadFieldResults.length==0">
+									<td colspan="3">没有找到匹配的记录</td>
+								</tr>
+	
+								<tr ng-if="uploadFieldResults.length !=0" ng-repeat="uploadFieldResult in uploadFieldResults">
+								    <td style="width:50px;">{{$index+1}}</td>
+									<td style="width:50px;">{{uploadFieldResult.rowNum}}</td>
+									<!-- <td style="width:80px;">{{uploadFieldResult.level}}</td> -->
+									<td>{{uploadFieldResult.log}}</td>
+									<!-- <td>{{uploadFieldResult.log | strreplace :"/;/g":"\n"}}</td> -->
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--end modal-->
+</div>

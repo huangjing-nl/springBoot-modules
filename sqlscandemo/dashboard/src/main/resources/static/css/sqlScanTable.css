@@ -1,0 +1,181 @@
+@CHARSET "UTF-8";
+.SQLScan .cellNumber{
+	width:50px !important;
+	
+}
+.SQLScan .SQLruleTable .cellName{
+	width: 150px;
+    word-wrap: break-word;/*在长单词或 URL 地址内部进行换行。*/
+    word-break:break-all;
+    white-space: normal !important;
+}
+.SQLScan .SQLruleTable .cellBaseType{
+	width: 81px;
+}
+.SQLScan .SQLruleTable  .cellCategory{
+	width: 80px;
+    word-break: break-all;
+}
+.SQLScan .SQLruleTable .cellLevel{
+	width: 100px;
+	
+}
+.SQLScan .SQLruleTable .cellDescription{
+	min-width: 80px;
+}
+.SQLScan .SQLruleTable .cellDescription div{
+	cursor:pointer;
+    word-break: keep-all;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.SQLScan .SQLruleTable .cellTypeRegexp div{
+	cursor:pointer;
+    word-break: keep-all;
+    white-space: nowrap;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+	
+}
+.SQLScan .SQLruleTable .cellConditionRegexp div{
+	cursor:pointer;
+    word-break: keep-all;
+    white-space: nowrap;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+.SQLScan .SQLruleTable .cellConditionRegex>div{
+
+}
+.SQLScan .SQLruleTable .cellOperation{
+	width: 100px;
+}
+.businessRules .fixed-table-container thead th {
+  border-left: none;
+}
+
+.businessRules .fixed-table-container tbody td {
+  border-left: none;
+}
+.allBussiness .row{
+	    padding: 5px 0;
+}
+.allBusinessRules select{
+	border: none;
+    background: rgba(255, 255, 255, 0);
+}
+
+
+.allBusinessRules .operaSelect{
+	/* float: right; */
+}
+
+.allBusinessRules .operaSelect>a{
+	display: inline-block;
+    margin: 0 10px;
+}
+
+
+.versionMaintain .cellNumber{
+    width:50px;
+}
+
+.versionMaintain .cellNumber{
+    width:50px;
+}
+
+.versionMaintain .cellName div{
+    word-wrap: break-word;
+    word-break:break-all;
+     cursor:pointer;
+    white-space: nowrap;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+.versionMaintain .cellBusiness{
+    word-wrap: break-word;
+    word-break:break-all;
+    white-space: normal !important;
+}
+.versionMaintain .cellCreated{
+    width: 170px;
+}
+.versionMaintain .cellFileName{
+    word-wrap: break-word;
+    word-break:break-all;
+    white-space: normal !important;
+}
+.versionMaintain  .cellStatus ul{
+    width: 80px;
+}
+
+.fixed-table-toolbar .search{
+    margin-top: 0;
+}
+.singleFile .configPanel .form-control{
+    background: none !important;
+}
+
+.singleFile .configPanel .btn{
+    border: 1px solid #e5e5e5;
+}
+
+#myTabContent .CodeMirror{
+  height: 280px;
+}
+
+/*报表*/
+.sqlReport{
+   /* background: #fef8efa3;*/
+    /*padding: 15px !important;*/
+    height: 100%;
+}
+.sqlReport .setDate{
+    border: 1px solid #fafafa;
+    padding: 10px;
+    margin-bottom: 10px;
+    background: #ffffff;
+    height: 50px;
+}
+.sqlReport .setDate div{
+    display: inline-block;
+
+}
+.sqlReport .setDate div input{
+    display: inline-block;
+    width: 100px;
+}
+
+.ruleReport{
+    position: relative;
+    height:100%;
+}
+.sqlReport .ruleReport .selectRule{
+    width: 150px;
+    position: absolute;
+    right: 100px;
+    z-index: 99;
+    top: 5px;
+}
+.sqlReport .ruleReport .selectRule select{
+    display: inline-block;
+    width: 150px;
+}
+
+.createPieGraph,.createBarRanking,createBarGraph{
+    border: 1px solid #e5e5e5;
+}
+.sqlReport .setHeightTop{
+    height: -moz-calc(40% - 60px);
+    height: -webkit-calc(40% - 60px);
+    height: calc(40% - 60px);
+}
+
+.sqlReport .setHeightTop2{
+    height: -moz-calc(60% - 25px);
+    height: -webkit-calc(60% - 25px);
+    height: calc(60% - 25px);
+    margin-top: 10px;
+   /* height:55%;*/
+}

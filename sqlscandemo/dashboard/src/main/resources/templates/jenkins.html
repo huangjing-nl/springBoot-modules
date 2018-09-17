@@ -1,0 +1,74 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <link rel="stylesheet" th:href="@{/js/lib/bootstrap-3.3.7-dist/css/bootstrap.css}" />
+  <link rel="stylesheet" th:href="@{/js/lib/bootstrap-table-master/dist/bootstrap-table.css}" />
+  <link rel="stylesheet" th:href="@{/css/common.css}" />  <!--th:href="@{~/css/bootstrap.css}-->
+  <link rel="stylesheet" th:href="@{/css/jenkins.css}" />
+  <title>SQLSCAN扫描结果</title>
+</head>
+<body>
+
+<div class="container-fluid jenkins">
+  <div class="ucd-panel-heading panelHead" >
+    <h3 style="line-height: 35px;">SQL 扫描检查结果</h3>
+  </div>
+  <div class="ucd-panel panel panel-default">
+    <div class="panel-body">
+
+      <div th:if="${#lists.isEmpty(results)}" class="alert alert-success" role="alert">
+        <h2>扫描成功, 未检测出问题！</h2>
+      </div>
+      <div th:if="${not #lists.isEmpty(results)}" class="fileSQLTable table-responsive" style="height:650px;">
+        <div id="test">
+          <!--<span th:text="${taskId}">默认taskId</span>-->
+          <button id="id" class="btn btn-primary pull-right" style="margin-bottom: 15px;" type="button" th:value="${taskId}">导&nbsp;&nbsp;出</button>
+        </div>
+        <table class="table table-striped ucd-specail-table">
+          <thead>
+            <tr>
+              <th>行序号</th>
+              <th>结果</th>
+              <th>级别</th>
+              <th>脚本名称</th>
+              <th>开始行数</th>
+              <th>结束行数</th>
+              <th>状态</th>
+              <th>执行时间</th>
+              <th>信息</th>
+            </tr>
+          </thead>
+          <tbody th:remove="all-but-first">
+            <tr th:each="result : ${results}">
+              <td th:text="${resultStat.count}">1</td>
+              <td th:text="${result.head}">Red chair</td>
+              <td th:text="${result.level}">Red chair</td>
+              <td th:text="${result.scriptName}">Red chair</td>
+              <td th:text="${result.startLineNum}">Red chair</td>
+              <td th:text="${result.endLineNum}">Red chair</td>
+              <td th:text="${result.status}">Red chair</td>
+              <td th:text="${#dates.format(result.created, 'yyyy-MM-dd')}">2018-02-20</td>
+              <td th:text="${result.message}">信息</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript" th:src="@{/js/lib/jquery/dist/jquery.js}"></script>
+<script th:inline="javascript">
+  var basePath = [[${#httpServletRequest.getScheme() + "://" + #httpServletRequest.getServerName() + ":" + #httpServletRequest.getServerPort() + #httpServletRequest.getContextPath()}]];
+  var taskId = $("#id").val();
+  console.log(basePath);
+  console.log(taskId);
+  $("#id").click(function () {
+    // alert("被点击了");
+    if (confirm("确定导出结果?")) {
+      window.location.href = basePath + "/api/v1/task/result/excel/" + taskId;
+    }
+  });
+</script>
+</body>
+</html>

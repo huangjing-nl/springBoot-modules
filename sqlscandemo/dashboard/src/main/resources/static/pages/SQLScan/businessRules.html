@@ -1,0 +1,102 @@
+<div class="container-fluid businessRules">
+			<!--<div class="ucd-panel-heading">
+				<span>业务规则配置</span>
+			</div>-->
+			<div class="ucd-panel panel panel-default">
+				<div class="panel-heading">
+					<span>业务规则配置</span>
+				</div>
+				<div class="panel-body configPanel">
+					<form name="businessRulesFrom" autocomplete="off"  ng-submit="businessRulesFrom.$valid && businessRulesFromSubmit(businessRulesFrom)" novalidate>
+						<div class="row">
+							<div class="form-group col-md-6">
+								<label for="name"><span>*</span>业务</label>
+								<div>
+									<select name="business" ng-change="changeSelect()" class="form-control" ng-model="selectBusinessValue" ng-options="business.id as business.name for business in businessLists" required>
+										<option value="">--请选择业务--</option>
+									</select>
+									<!-- <span style="color:red" ng-show="businessRulesFrom.business.$dirty && businessRulesFrom.business.$invalid">
+										<span ng-show="businessRulesFrom.business.$error.required">请选择业务！</span> 
+									</span>  -->
+									<span style="color:red" ng-show="businessRulesFrom.$submitted && businessRulesFrom.business.$invalid">未选择业务！</span>
+								</div>
+							</div>	
+						</div>
+						<div class="row">
+							<div class="form-group col-md-6">
+								<label for="name"><span>*</span>操作类型</label>
+								<div>
+									<select name="type"  ng-change="changeSelect()" class="form-control" ng-model="selectTypeValue" ng-options="type.name as type.name for type in typeLists" required>
+										<option value="">--请选择操作类型--</option>
+									</select>
+									<!-- <span style="color:red" ng-show="businessRulesFrom.type.$dirty && businessRulesFrom.type.$invalid">
+										<span ng-show="businessRulesFrom.type.$error.required">请选择操作类型！</span> 
+									</span>  -->
+									<span style="color:red" ng-show="businessRulesFrom.$submitted && businessRulesFrom.type.$invalid">未选择操作类型！</span>
+								</div>
+							</div>	
+						</div>
+						<!--<div id="ruleConfig" style="display: none;" class="form-group clear rule" >-->
+							<!--<div class="selectRule">-->
+				               	<!--<div class="bs-example">-->
+				                   	<!--<table data-toggle="table" id="selectedRuleLists" data-search="true"></table>-->
+				               	<!--</div>-->
+				            <!--</div>-->
+							<!-- <div class="selectedRule">
+								<label >*已选规则</label>
+						        <div class="ruleList" id="ruleList">
+						    		<ul class="list-group">
+						    		 	<li  style="position: relative;" class="list-group-item " ng-repeat="rule in selectRuleList" >
+						    		 		<span>{{rule.name}}</span>
+						    		 		<select style="float: right;" required>
+						    		 			<option value="1">INFO</option>
+						    		 			<option value="2">WARN</option>
+						    		 			<option value="3">ERROR</option>
+						    		 			<option value="4">FATAL</option>
+						    		 		</select>
+									  	</li>
+									</ul>
+							    </div>
+						    	<span style="color:red" ng-if="businessRulesFrom.$submitted && selectassociateVale.length==0">未选择与块关联的规则!</span>
+							</div> -->
+							<!--<div class="arrows">-->
+								<!--<div ng-click="addBusinessRules()"><a href="javascript:void(0);"><span class="glyphicon glyphicon-arrow-left"></span></a></div>-->
+								<!--<div ng-click="removeBusinessRules()"><a href="javascript:void(0);"><span class="glyphicon glyphicon-arrow-right"></span></a></div>-->
+							<!--</div>-->
+							
+
+						<div class="bs-example">
+							<table data-toggle="table" id="NoSelectedRuleLists" class="ucd-table"></table>
+						</div>
+
+							
+							
+							
+							<!-- <div class="allRule">
+								<label >*所有规则</label>
+						        <div class="ruleList" id="ruleList">
+						    		<ul class="list-group">
+						    		 	<li  style="position:relative;" class="list-group-item " ng-repeat="rule in ruleList" ng-click="selectRule($event,rule)" >
+						    			 	{{rule.name}}
+									  	</li>
+									</ul>
+									
+							    </div>
+							</div> -->
+						<!--</div>-->
+						<div class="form-group">
+							<button type="submit" class="btn btn-primary">&nbsp;提&nbsp;&nbsp;交&nbsp;</button>
+							<button id="reset" type="reset" class="btn btn-warning" ng-click="resetValue()">&nbsp;重&nbsp;&nbsp;置&nbsp;</button>
+						</div>
+					</form>
+				</div>
+			</div>
+</div>
+<!--<div style="display:none;" id="template3" >-->
+	<!--<ul class="list-group">-->
+		<!--<li class="list-group-item">INFO</li>-->
+		<!--<li class="list-group-item">WARN</li>-->
+		<!--<li class="list-group-item">ERROR</li>-->
+		<!--<li class="list-group-item">FATAL</li>-->
+	<!--</ul>-->
+<!--</div>-->

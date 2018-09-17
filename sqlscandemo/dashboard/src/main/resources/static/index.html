@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+<title>Pandora测试工具</title>
+<link rel="stylesheet" href="js/lib/codemirror-5.32.0/lib/codemirror.css">
+<link rel="stylesheet" href="js/lib/codemirror-5.32.0/theme/base16-light.css">
+<link rel="stylesheet" href="js/lib/codemirror-5.32.0/addon/hint/show-hint.css">
+<!--<link rel="stylesheet" href="js/lib/bootstrap-treeview/default.css">-->
+<!-- <link rel="stylesheet" href="js/lib/bootswatch/cyborg/bootstrap.css"> -->
+<link rel="stylesheet" href="js/lib/bootstrap-3.3.7-dist/css/bootstrap.css">
+
+
+<link rel="stylesheet" href="js/lib/bootstrap-fileinput-master/css/fileinput.css">
+<!-- <link rel="stylesheet" href="js/lib/bootstrap-select-master/dist/css/bootstrap-select.css"> -->
+
+<!-- <link rel="stylesheet" href="js/lib/bootstrap-table-develop/bootstrap-table-develop/docs/dist/bootstrap-table.css"> -->
+<link rel="stylesheet" href="js/lib/bootstrap-table-master/dist/bootstrap-table.css">
+<!-- <link rel="stylesheet" href="js/lib/Font-Awesome-3.2.1/Font-Awesome-3.2.1/css/font-awesome.min.css"> -->
+<!-- <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+<!-- <link rel="stylesheet" href="js/lib/bootstrap-treeview/bootstrap-treeview.min.css"> -->
+	<link rel="stylesheet" href="js/lib/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">
+
+<link rel="stylesheet" href="css/sidebar.css">
+<link rel="stylesheet" href="css/main.css">
+<!--<link rel="stylesheet" href="css/rule.css">-->
+<link rel="stylesheet" href="css/SQLRule.css">
+
+
+<!--[if lt IE 9]>
+<script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+<script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link rel="stylesheet" href="js/lib/layer-v3.1.0/layer/theme/default/layer.css"  media="all">
+<!-- <link rel="stylesheet" href="js/lib/layui-v2.2.2/layui/css/layui.css" media="all"> -->
+<link rel="stylesheet" href="css/common.css" media="all">
+	<link rel="stylesheet" href="css/sqlScanTable.css">
+	<link rel="stylesheet" href="css/odsScanTable.css">
+
+</head>
+<body>
+
+	<div style="width: 100%;height: 100%;" id="wrapper" ng-controller="LoginCtrl">
+		<div ng-init="checkSecurity()"></div> <!--ng-if="!loggedF()"-->
+		<div style="width: 100%;height: 100%;" ng-if="!loggedF()" ng-include="'error.html'"></div>
+		<div style="width: 100%;height: 100%;" ng-if="loggedF()"  ng-include="'menu.html'"></div>
+	</div>
+	
+	<script data-main="js/main" src="js/lib/requirejs/require.js"></script>
+	
+</body>
+
+
+
+<!--<div style="display:none;"  id="template1" >-->
+	<!--<div class="row associate" style="margin: 0;">-->
+		<!--<div class="col-md-12">-->
+			<!--<div class="row">-->
+				<!--<div class="col-md-12 associateImag">-->
+					<!--<ul>-->
+						<!--<li>-->
+							<!--<img alt="" src="images/unoin.png">-->
+							<!--<div>外关联</div>-->
+						<!--</li>-->
+						<!--<li>-->
+							<!--<img alt="" src="images/leftJoin.png">-->
+							<!--<div>右关联</div>-->
+						<!--</li>-->
+						<!--<li>-->
+							<!--<img alt="" src="images/rightJoin.png">-->
+							<!--<div>左关联</div>-->
+						<!--</li>-->
+						<!--<li>-->
+							<!--<img alt="" src="images/insert.png">-->
+							<!--<div>内关联</div>-->
+						<!--</li>-->
+					<!--</ul>-->
+				<!--</div>-->
+			<!--</div>-->
+			<!---->
+			<!--<div class="row" style="overflow-y: auto;height:120px" >-->
+				<!--<div class="col-md-12">-->
+
+					<!--<ul class="associateField">-->
+						<!--<li class="field">-->
+							<!--<div class="input-group">-->
+								<!--<input type="text" class="form-control">-->
+								<!--<div class="input-group-btn">-->
+									<!--<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">-->
+										<!--<span class="caret"></span>-->
+									<!--</button>-->
+									<!--<ul class="dropdown-menu pull-right">-->
+										<!--<li><a href="#">字段1</a></li>-->
+										<!--<li><a href="#">字段2</a></li>-->
+									<!--</ul>-->
+								<!--</div>&lt;!&ndash; /btn-group &ndash;&gt;-->
+							<!--</div>-->
+						<!--</li>-->
+						<!--<li>-->
+							<!--<div>=</div>-->
+						<!--</li>-->
+						<!--<li class="field">-->
+							<!--<div class="input-group">-->
+								<!--<input type="text" class="form-control">-->
+								<!--<div class="input-group-btn">-->
+									<!--<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">-->
+										<!--<span class="caret"></span>-->
+									<!--</button>-->
+									<!--<ul class="dropdown-menu pull-right">-->
+										<!--<li><a href="#">字段1</a></li>-->
+										<!--<li><a href="#">字段2</a></li>-->
+									<!--</ul>-->
+								<!--</div>&lt;!&ndash; /btn-group &ndash;&gt;-->
+							<!--</div>-->
+						<!--</li>-->
+						<!--<li class="field">-->
+							<!--<div class="btn-group" style="vertical-align: baseline;">-->
+								<!--<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span></button>-->
+								<!--<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span></button>-->
+							<!--</div>-->
+						<!--</li>-->
+					<!--</ul>-->
+					<!---->
+					<!---->
+					<!--<ul class="associateField">-->
+						<!--<li class="field">-->
+							<!--<div class="input-group">-->
+								<!--<input type="text" class="form-control">-->
+								<!--<div class="input-group-btn">-->
+									<!--<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">-->
+										<!--<span class="caret"></span>-->
+									<!--</button>-->
+									<!--<ul class="dropdown-menu pull-right">-->
+										<!--<li><a href="#">字段1</a></li>-->
+										<!--<li><a href="#">字段2</a></li>-->
+									<!--</ul>-->
+								<!--</div>&lt;!&ndash; /btn-group &ndash;&gt;-->
+							<!--</div>-->
+						<!--</li>-->
+						<!--<li>-->
+							<!--<div>=</div>-->
+						<!--</li>-->
+						<!--<li class="field">-->
+							<!--<div class="input-group">-->
+								<!--<input type="text" class="form-control">-->
+								<!--<div class="input-group-btn">-->
+									<!--<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">-->
+										<!--<span class="caret"></span>-->
+									<!--</button>-->
+									<!--<ul class="dropdown-menu pull-right">-->
+										<!--<li><a href="#">字段1</a></li>-->
+										<!--<li><a href="#">字段2</a></li>-->
+									<!--</ul>-->
+								<!--</div>&lt;!&ndash; /btn-group &ndash;&gt;-->
+							<!--</div>-->
+						<!--</li>-->
+						<!--<li class="field">-->
+							<!--<div class="btn-group" style="vertical-align: baseline;">-->
+								<!--<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span></button>-->
+								<!--<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span></button>-->
+							<!--</div>-->
+						<!--</li>-->
+					<!--</ul>-->
+					<!---->
+					<!---->
+					<!--<ul class="associateField">-->
+						<!--<li class="field">-->
+							<!--<div class="input-group">-->
+								<!--<input type="text" class="form-control">-->
+								<!--<div class="input-group-btn">-->
+									<!--<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">-->
+										<!--<span class="caret"></span>-->
+									<!--</button>-->
+									<!--<ul class="dropdown-menu pull-right">-->
+										<!--<li><a href="#">字段1</a></li>-->
+										<!--<li><a href="#">字段2</a></li>-->
+									<!--</ul>-->
+								<!--</div>&lt;!&ndash; /btn-group &ndash;&gt;-->
+							<!--</div>-->
+						<!--</li>-->
+						<!--<li>-->
+							<!--<div>=</div>-->
+						<!--</li>-->
+						<!--<li class="field">-->
+							<!--<div class="input-group">-->
+								<!--<input type="text" class="form-control">-->
+								<!--<div class="input-group-btn">-->
+									<!--<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">-->
+										<!--<span class="caret"></span>-->
+									<!--</button>-->
+									<!--<ul class="dropdown-menu pull-right">-->
+										<!--<li><a href="#">字段1</a></li>-->
+										<!--<li><a href="#">字段2</a></li>-->
+									<!--</ul>-->
+								<!--</div>&lt;!&ndash; /btn-group &ndash;&gt;-->
+							<!--</div>-->
+						<!--</li>-->
+						<!--<li class="field">-->
+							<!--<div class="btn-group" style="vertical-align: baseline;">-->
+								<!--<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span></button>-->
+								<!--<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span></button>-->
+							<!--</div>-->
+						<!--</li>-->
+					<!--</ul>-->
+				<!---->
+				<!--</div>-->
+			<!--</div>-->
+		<!--</div>-->
+	<!--</div>-->
+<!--</div>-->
+</html>

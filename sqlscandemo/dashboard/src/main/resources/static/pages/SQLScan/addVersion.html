@@ -1,0 +1,59 @@
+<div class="container-fluid addVersion">
+			<div class="ucd-panel-heading">
+				<span>{{titleName}}</span>任务
+			</div>
+			<div class="ucd-panel panel-default">
+				<div class="panel-body configPanel">
+					<form name="addVersionFrom" autocomplete="off"  ng-submit="addVersionFrom.$valid && addVersionFromSubmit(addVersionFrom)" novalidate>
+					<div class="row">
+						<div class="form-group col-md-6">
+						    <label for="name"><span>*</span>任务名称</label>
+						    <input name="projectName" ng-model="projectName" type="text" class="form-control" id="name" placeholder="请输入项目名称，不超过N个字符" required>
+						    <!-- <span style="color:red" ng-show="addVersionFrom.projectName.$dirty && addVersionFrom.projectName.$invalid">
+ 								<span ng-show="addVersionFrom.projectName.$error.required">项目名称为必填项。</span>
+ 							</span> -->
+ 							<span style="color:red" ng-show="addVersionFrom.$submitted && addVersionFrom.projectName.$invalid">任务名称未通过校验。</span>
+						</div>
+					</div>
+					<div class="row">	   
+						<div class="form-group col-md-6">
+							 <label for="name"><span>*</span>业务类型</label>
+ 							  <div>
+								  <select name="businessType" class="form-control" ng-model="selectBusinessTypeValue" ng-options="businessType.name as businessType.name for businessType in businessTypeLists" required>
+									  <option value="">--请选择业务类型--</option>
+								  </select>
+								 <!--  <span style="color:red" ng-show="addVersionFrom.businessType.$dirty && addVersionFrom.businessType.$invalid">
+									  <span ng-show="addVersionFrom.businessType.$error.required">请选择业务类型！</span> 
+								  </span> -->
+								  <span style="color:red" ng-show="addVersionFrom.$submitted && addVersionFrom.businessType.$invalid">业务类型未通过校验。</span>
+						 	 </div>
+						 </div>
+					</div>
+					
+					<div class="row">	   
+						<div class="form-group col-md-6">
+						      <label for="name"><span>*</span>库类型</label>
+						 	  <div>
+								 <select name="basetype" class="form-control" ng-model="selectBasetypeValue" ng-options="basetype.name as basetype.name for basetype in baseTypeLists" required>
+									<option value="">--请选择库类型--</option>
+								 </select>
+								 <!-- <span style="color:red" ng-show="addVersionFrom.basetype.$dirty && addVersionFrom.basetype.$invalid">
+									<span ng-show="addVersionFrom.basetype.$error.required">请选择库类型！</span> 
+								 </span> -->
+								 <span style="color:red" ng-show="addVersionFrom.$submitted && addVersionFrom.basetype.$invalid">库类型未通过校验。</span>
+						 	 </div>
+						 </div>		
+					</div>
+						  <!--  <div class="form-group">
+							   <label for="name">*上传文件</label>
+							   <input type="text" class="form-control" id="name" placeholder="请输入轮次">
+						  </div> -->
+						 <div class="form-group">
+						     <button type="submit" class="btn btn-primary">&nbsp;提&nbsp;&nbsp;交&nbsp;</button>
+							 <button type="button" class="btn btn-warning" ng-click="resetValue()">&nbsp;取&nbsp;&nbsp;消&nbsp;</button>
+						 </div>
+					  </form>
+				</div>
+			</div>
+
+</div>

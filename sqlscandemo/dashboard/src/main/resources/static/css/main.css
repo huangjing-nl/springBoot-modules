@@ -1,0 +1,101 @@
+@CHARSET "UTF-8";
+html,body{
+	width:100%;
+	height:100%;
+}
+*{
+	margin:0;
+	padding:0;
+	font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+}
+.footer{
+	padding-left: 30px;
+    position: absolute;
+    height: 80px;
+    width:100%;
+	bottom: 0;
+    border-width: 1px 0 0;
+	background: #262626;    
+	
+}
+#mainWindow{
+	height:calc(100% - 20px);
+}
+a:hover, a:visited, a:link, a:active {
+    text-decoration:none
+}
+/* placeholder style */
+input::-webkit-input-placeholder {
+	color: #bdb2b2;
+	padding:3px;
+}
+input:-ms-input-placeholder {  /* IE10+ */
+	color: #bdb2b2;
+	padding:3px;
+}
+
+input:-moz-placeholder { /*  Firefox4-18 */
+	color: #bdb2b2;
+	padding:3px;
+}
+input::-moz-placeholder {  /* Firefox19+ */
+	color: #bdb2b2;
+	padding:3px;
+}
+
+input{
+	padding:3px;
+	
+}
+/* placeholder style */
+
+/*
+#mainWindow{
+        min-width: 800px;
+}
+*/
+
+.table tr>th,.table tr>td{
+	text-align: center;
+	
+}
+
+/* layer style */
+.modal-content {
+	/*background-color: #525252 !important;*/
+}
+
+ul li{
+	
+	list-style-type: none;
+	
+}
+.peopleInfo{
+	float: right;
+}
+.peopleInfo .navbar-brand{
+	padding: 15px 10px;
+}
+
+.middlePageH{
+	padding: 20px 0;
+	height: 70%;
+	height:-moz-calc(100% - 75px - 50px); 
+	height:-webkit-calc(100% - 75px - 50px);
+	height: calc(100% - 75px - 50px);
+	background: #f5f5f5;
+}
+.middlePageH .mainContent{
+	height: 100%;
+	background: #eee;
+}
+
+/* search */
+.results tr[visible='false'],
+.no-result{
+  display:none;
+}
+
+.results tr[visible='true']{
+  display:table-row;
+}

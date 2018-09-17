@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huawei.spring.mappers.SQLScanMapper.BigTableMapper">
+  <sql id="columns">id, name , isPt_d, isPt_h</sql>
+  <resultMap id="classOfBigTable" type="com.huawei.spring.catalogue.SQLScan.BigTable">
+    <id column="id" property="id"/>
+    <result column="name" property="name"/>
+    <result column="isPt_d" property="isPt_d"/>
+    <result column="isPt_h" property="isPt_h"/>
+  </resultMap>
+  <select id="findAll" resultMap="classOfBigTable">
+    SELECT <include refid="columns"/> FROM big_table_list
+  </select>
+</mapper>

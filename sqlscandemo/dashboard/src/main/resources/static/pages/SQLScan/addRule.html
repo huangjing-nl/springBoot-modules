@@ -1,0 +1,116 @@
+<div class="container-fluid addRule">
+			<!--<div class="ucd-panel-heading">
+				<span>{{titleName}}</span>Rule
+			</div>-->
+			<div class="ucd-panel panel panel-default">
+				<div class="panel-heading">
+					<span>{{titleName}}</span>Rule
+				</div>
+				<div class="panel-body configPanel">
+					<form name="addRuleFrom" autocomplete="off"  ng-submit="addRuleFrom.$valid && addRuleSubmit(addRuleFrom)" novalidate>
+						<div class="row">
+							<div class="form-group col-md-6">
+							    <label for="name"><span>*</span>名称</label>
+							    <input name="name" type="text" class="form-control" ng-model="ruleName" placeholder="请输入规则名称" required>
+							   <!--  <span style="color:red" ng-show="addRuleFrom.ruleName.$dirty && addRuleFrom.ruleName.$invalid">
+	 								<span ng-show="addRuleFrom.ruleName.$error.required">规则名称为必填项。</span>
+	 							</span> -->
+	 							<span style="color:red" ng-show="addRuleFrom.$submitted && addRuleFrom.name.$invalid">名称未通过校验。</span>
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-group col-md-6">
+								<label for="name"><span>*</span>分类</label>
+								<input name="category" type="text" class="form-control" ng-model="ruleCategory" placeholder="请输入规则分类" required>
+								<span style="color:red" ng-show="addRuleFrom.$submitted && addRuleFrom.category.$invalid">分类未通过校验。</span>
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-group col-md-6">
+						    	<label for="name">规则描述</label>
+						    	<textarea name="description" class="form-control" rows="3" ng-model="ruleDescribe" placeholder="请输入规则描述"></textarea>
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-group col-md-6">
+								<label for="name"><span>*</span>请选择</label>
+								<div style="border: 1px solid #e5e5e5; padding: 5px;">
+									<input type="radio" name="radiobutton" ng-value="0" ng-model="setSelect"/><span>规则</span>
+									<input style="margin-left:10px;" type="radio" name="radiobutton" ng-value="1" ng-model="setSelect"/><span>方法</span>
+								</div>
+
+							</div>
+						</div>
+
+						<div ng-if="setSelect=='0'" class="row">
+						 	<div class="form-group col-md-6">
+							   <label for="name"><span>*</span>类型规则</label>
+							   <input type="text" name="typeRegexp" class="form-control" id="name"  ng-model="ruleType" placeholder="请输入类型规则" required>
+							  <!--  <span style="color:red" ng-show="addRuleFrom.ruleExpression.$dirty && addRuleFrom.ruleExpression.$invalid">
+ 									<span ng-show="addRuleFrom.ruleExpression.$error.required">规则表达式为必填项。</span>
+ 							   </span> -->
+ 							   <span style="color:red" ng-show="addRuleFrom.$submitted && addRuleFrom.typeRegexp.$invalid">类型规则未通过校验。</span>
+							</div>
+						</div>
+						<div  ng-if="setSelect=='0'" class="row">
+							<div class="form-group col-md-6">
+								<label for="name">条件规则</label>
+								<input type="text" name="conditionRegexp" class="form-control" id="name1"  ng-model="ruleCondition" placeholder="请输入条件规则">
+								<!-- <span style="color:red" ng-show="addRuleFrom.$submitted && addRuleFrom.conditionRegexp.$invalid">条件规则未通过校验。</span> -->
+							</div>
+						</div>
+
+						<div  ng-if="setSelect=='0'" class="row">
+							<div class="form-group col-md-6">
+								<label for="name">分组规则</label>
+								<input type="text" name="groupByRegexp" class="form-control" ng-model="groupByCondition" placeholder="请输入分组规则">
+								<!-- <span style="color:red" ng-show="addRuleFrom.$submitted && addRuleFrom.conditionRegexp.$invalid">条件规则未通过校验。</span> -->
+							</div>
+						</div>
+						<div  ng-if="setSelect=='1'" class="row">
+							<div class="form-group col-md-6">
+								<label for="name"><span>*</span>方法名</label>
+								<input type="text" name="methodName" class="form-control" ng-model="methodName" placeholder="请输入方法名" required>
+								<span style="color:red" ng-show="addRuleFrom.$submitted && addRuleFrom.methodName.$invalid">方法名未通过校验。</span>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="form-group col-md-6">
+							<label for="name"><span>*</span>校验级别</label>
+								<div>
+									<select name="level" class="form-control" ng-model="selectLevelValue" ng-options="level.level as level.level for level in levelLists" required>
+										<option value="">--请选择校验级别--</option>
+									</select>
+									<!-- <span style="color:red" ng-show="addRuleFrom.ruleLevel.$dirty && addRuleFrom.ruleLevel.$invalid">
+										<span ng-show="addRuleFrom.ruleLevel.$error.required">请选择规则校验级别！</span> 
+									</span> -->
+									<span style="color:red" ng-show="addRuleFrom.$submitted && addRuleFrom.level.$invalid">校验级别未通过校验。</span>
+								</div>
+						 	</div>
+						</div>
+						<div class="row">
+							<div class="form-group col-md-6">
+								<label for="name"><span>*</span>库类型</label>
+								<div>
+									<select name="type" class="form-control" ng-model="selectTypeValue" ng-options="type.name as type.name for type in typeLists" required>
+										<option value="">--请选择库类型--</option>
+									</select>
+									<!-- <span style="color:red" ng-show="addRuleFrom.type.$dirty && addRuleFrom.type.$invalid">
+										<span ng-show="addRuleFrom.type.$error.required">请选择库类型！</span>
+									</span>  -->
+									<span style="color:red" ng-show="addRuleFrom.$submitted && addRuleFrom.type.$invalid">库类型别未通过校验。</span>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-group col-md-6">
+								<button type="submit" class="btn btn-primary">&nbsp;提&nbsp;&nbsp;交&nbsp;</button>
+								<button type="button" class="btn btn-warning" ng-click="resetValue()">&nbsp;重&nbsp;&nbsp;置&nbsp;</button>
+								<button style="float: right" type="button" class="btn btn-primary" ng-click="goBack()">&nbsp;返&nbsp;&nbsp;回&nbsp;</button>
+							</div>
+						</div>
+					</form>	 
+				</div>
+			</div>
+</div>

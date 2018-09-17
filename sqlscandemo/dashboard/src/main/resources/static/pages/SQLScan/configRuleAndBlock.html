@@ -1,0 +1,85 @@
+<div class="container-fluid configRuleAndBlock">
+	<div class="ucd-panel-heading">
+		<h5>业务规则配置查看</h5>
+	</div>
+	<div class="ucd-panel panel-default">
+		<div class="panel-body configPanel">
+			<form name="configRuleAndBlockFrom" autocomplete="off" ng-submit="configRuleAndBlockFrom.$valid && configRuleAndBlockSubmit(configRuleAndBlockFrom)" novalidate>
+				<div class="row">
+					<div class="form-group col-md-6">
+						<label for="name"><span>*</span>块</label>
+						<div>
+							<select name="block" class="form-control" ng-model="selectBlockValue" ng-options="block.id as block.name for block in blockLists" required>
+								<option value="">--请选择块--</option>
+							</select>
+							<span style="color:red" ng-show="configRuleAndBlockFrom.block.$dirty && configRuleAndBlockFrom.block.$invalid">
+										<span ng-show="configRuleAndBlockFrom.block.$error.required">请选择规则校验级别！</span>
+							</span>
+							<span style="color:red" ng-show="configRuleAndBlockFrom.$submitted && configRuleAndBlockFrom.block.$invalid">未选择块！</span>
+						</div>
+					</div>
+				</div>
+
+				<!-- <div class="form-group">
+						    <label >*块</label>
+						    <div>
+						    	<div class="input-group">
+									<input type="text" class="form-control">
+									<div class="input-group-btn">
+										<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+											<span class="caret"></span>
+										</button>
+										<ul class="dropdown-menu pull-right">
+											<li><a href="#">字段1</a></li>
+											<li><a href="#">字段2</a></li>
+										</ul>
+									</div>/btn-group
+								</div>/input-group
+						    </div>
+						</div> -->
+
+				<div class="row">
+					<div class="form-group col-md-6">
+						<label><span>*</span>请选择与块关联的规则</label>
+						<div class="ruleList" id="ruleList">
+							<ul class="list-group">
+								<li class="list-group-item " ng-repeat="rule in ruleList" ng-click="selectRule($event,rule)">
+									{{rule.name}}
+								</li>
+								<!-- 	<li>与块关联的规则1</li>
+									<li class="list-group-item">与块关联的规则2</li>
+									<li class="list-group-item">与块关联的规则3</li>
+									<li class="list-group-item">
+										<span class="selectFlag glyphicon glyphicon-ok"></span>
+										与块关联的规则4
+									</li>
+									<li class="list-group-item">与块关联的规则5</li>
+									<li class="list-group-item">与块关联的规则6
+										<span class="selectFlag glyphicon glyphicon-ok"></span>
+										
+									</li>
+									<li class="list-group-item">与块关联的规则7</li>
+									<li class="list-group-item">与块关联的规则8</li>
+									<li class="list-group-item">与块关联的规则9</li>
+									<li class="list-group-item">与块关联的规则10
+										<span class="selectFlag glyphicon glyphicon-ok"></span>
+									</li>
+									<li class="list-group-item">每年更新成本</li>
+									<li class="list-group-item">
+										<span class="selectFlag glyphicon glyphicon-ok"></span>
+										折扣优惠
+									</li> -->
+							</ul>
+						</div>
+						<span style="color:red" ng-if="configRuleAndBlockFrom.$submitted && selectassociateVale.length==0">未选择与块关联的规则!</span>
+					</div>
+				</div>
+				<div class="form-group">
+					<button type="submit" class="btn btn-primary">&nbsp;提&nbsp;&nbsp;交&nbsp;</button>
+					<button type="button" class="btn btn-warning" ng-click="resetValue1()">&nbsp;取&nbsp;&nbsp;消&nbsp;</button>
+
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

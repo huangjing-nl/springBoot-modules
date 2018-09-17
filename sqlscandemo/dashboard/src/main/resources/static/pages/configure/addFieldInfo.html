@@ -1,0 +1,59 @@
+<div class="container-fluid addFieldInfo">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <span>{{titleName}}</span>字段信息
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <form name="addFieldInfoFrom" autocomplete="off" ng-submit="addFieldInfoFrom.$valid && addFieldInfoSubmit(addFieldInfoFrom)" novalidate>
+                                <div class="form-group">
+                                    <label for="name">*表名称</label>
+                                    <input name="tableName" type="text" class="form-control" ng-model="tableName" placeholder="请输入表名称" required>
+                                    <span style="color:red" ng-show="addFieldInfoFrom.$submitted && addFieldInfoFrom.tableName.$invalid">表名称未通过校验。</span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="name">*字段名称</label>
+                                    <input name="colName" type="text" class="form-control" ng-model="colName" placeholder="请输入字段名称" required>
+                                    <span style="color:red" ng-show="addFieldInfoFrom.$submitted && addFieldInfoFrom.colName.$invalid">表名称未通过校验。</span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="name">*字段序列号</label>
+                                    <input name="colId" type="number" class="form-control" ng-model="colId" placeholder="请输入字段序列号" required>
+                                    <span style="color:red" ng-show="addFieldInfoFrom.$submitted && addFieldInfoFrom.colId.$invalid">字段序列号未通过校验。</span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="name">*规则名</label>
+                                    <div>
+                                        <select name="ruleId" class="form-control" ng-model="selectRule" ng-options="rule.ruleId as rule.ruleName for rule in ruleList" required>
+                                            <option value="">--请选择规则名称--</option>
+                                        </select>
+                                    </div>
+                                    <span style="color:red" ng-show="addTableInfoFrom.$submitted && addTableInfoFrom.level.$invalid">规则名未通过校验。</span>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary">
+                                        <span class="glyphicon glyphicon-ok"></span><span>&nbsp;提&nbsp;&nbsp;交&nbsp;</span>
+                                    </button>
+                                    <button type="reset" class="btn btn-warning" ng-click="resetField()">
+                                        <span class="glyphicon glyphicon-refresh"></span><span>&nbsp;重&nbsp;&nbsp;置&nbsp;</span>
+                                    </button>
+                                    <a href="#/configFieldInfo">
+                                        <button type="button" class="btn btn-primary pull-right">
+                                            <span class="glyphicon glyphicon-share-alt"></span><span>&nbsp;返&nbsp;&nbsp;回&nbsp;</span>
+                                        </button>
+                                    </a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

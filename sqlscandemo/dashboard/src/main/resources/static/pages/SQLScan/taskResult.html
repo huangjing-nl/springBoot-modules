@@ -1,0 +1,53 @@
+<div class="container-fluid taskResult">
+				<div class="ucd-panel-heading" >
+					<span style="line-height: 35px;">任务执行结果</span>
+					<a href="javascript:void(0);" ng-click="exportExcel()">
+						<button class="btn btn-primary pull-right" style="margin-right: 10px">
+							&nbsp;导出结果&nbsp;
+						</button>
+					</a>
+				</div>
+			<div class="ucd-panel panel panel-default">
+				<div class="panel-body">
+					<div class="fileSQLTable table-responsive" style="height:550px;">
+				    	<table class="table table-striped ucd-specail-table" >
+				    		<thead>
+								<tr>
+									<!-- <th>id</th> -->
+									<th>序号</th>
+									<th>结果</th>
+									<th>级别</th>
+									<th>脚本名称</th>
+									<th>开始行数</th>
+									<th>结束行数</th>
+									<th>状态</th>
+									<th>信息</th>
+								</tr>
+							</thead>
+				    		<tbody>
+
+							<tr class="no-records-found" ng-if="taskResults.length==0">
+								<td colspan="7">没有找到匹配的记录</td>
+							</tr>
+
+							<tr  ng-if="taskResults.length !=0" ng-repeat="taskResult in taskResults">
+								   <!--  <td>{{fileInfo.id}}</td> -->
+								    <td style="width:45px;">{{$index+1}}</td>
+									<td style="width:80px;">{{taskResult.head}}</td>
+									<td style="width:80px;">{{taskResult.level}}</td>
+									<td>{{taskResult.scriptName}}</td>
+									<td style="width:75px;">{{taskResult.startLineNum}}</td>
+									<td style="width:75px;">{{taskResult.endLineNum}}</td>
+									<td style="width:50px;">{{taskResult.status}}</td>
+									<td >{{taskResult.message}}</td>
+								</tr>
+							</tbody>
+				     	</table>
+					</div>
+					<div class="form-group" style="padding-top: 10px;">
+						<button type="button" class="btn btn-primary" ng-click="goBack()">返&nbsp;&nbsp;回</button>
+					</div>
+				</div>
+			</div>
+
+</div>

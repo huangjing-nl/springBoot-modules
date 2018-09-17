@@ -1,0 +1,76 @@
+@CHARSET "UTF-8";
+.configRuleInfo .operation ul li{
+    display:inline-block;
+    margin: 0 5px;
+    cursor: pointer;
+}
+.configRuleInfo .remarks div{
+    cursor:pointer;
+    word-break: keep-all;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.configRuleInfo .cellRuleName{
+    word-wrap: break-word;
+    word-break:break-all;
+    white-space: normal !important;
+}
+.configRuleInfo .cellRegexp div{
+    cursor:pointer;
+    word-break: keep-all;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+.configureTableInfo .operation ul li{
+    display:inline-block;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+
+.configureTableInfo .cellTableName{
+    word-wrap: break-word;
+    word-break: break-all;
+    white-space: normal !important;
+}
+.configureTableInfo .cellPath div{
+    cursor:pointer;
+    word-break: keep-all;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.configFieldInfo .operation ul li{
+    display:inline-block;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+.configFieldInfo .cellTableName{
+    word-wrap: break-word;
+    word-break: break-all;
+    white-space: normal !important;
+}
+
+.configFieldInfo .cellColName{
+    word-wrap: break-word;
+    word-break: break-all;
+    white-space: normal !important;
+}
+.configFieldInfo .cellColRegexp div{
+    cursor:pointer;
+    word-break: keep-all;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.configFieldInfo .uploadResult{
+	min-height: 70px;
+	max-height: 400px;
+	overflow-y: auto;
+}
