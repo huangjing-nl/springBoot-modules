@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ScheduledFuture;
@@ -88,10 +89,30 @@ public class TestController {
       @Override
       public void run() {
         count++;
+        System.out.println("--------------------------------------");
         System.out.println("当前数量是每三秒增加一次：" + count);
       }
     }, 3000);
-    futureMap.put("1", future);
+    // futureMap.put("1", future);
+  }
+
+  @RequestMapping(value = "timer", method = RequestMethod.GET)
+  public void timerTest(){
+    System.out.println(System.currentTimeMillis());
+    long time = new Date().getTime();
+    long l = time + 10 * 1000;
+    Date next = new Date(l);
+    future = scheduler.schedule(new Runnable() {
+      int count = 0;
+      @Override
+      public void run() {
+        count++;
+        System.out.println("--------------------------------------");
+        System.out.println("我已经执行了在当前时间的后10秒的任务了");
+        System.out.println(System.currentTimeMillis());
+      }
+    }, next);
+    // futureMap.put("1", future);
   }
 
   @RequestMapping(value = "endTask", method = RequestMethod.GET)
